@@ -1,0 +1,26 @@
+# TDApp — PostgreSQL local development database
+# Start: docker compose up -d
+# Stop:  docker compose down
+# Reset: docker compose down -v && docker compose up -d
+
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: tdapp-db
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: tdapp_user
+      POSTGRES_PASSWORD: tdapp_dev_pass
+      POSTGRES_DB: tdapp_dev
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tdapp_user -d tdapp_dev"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
