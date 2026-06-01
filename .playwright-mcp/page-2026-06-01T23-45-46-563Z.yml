@@ -1,0 +1,100 @@
+- generic [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - heading "Agenda" [level=1] [ref=e6]
+          - paragraph [ref=e7]: Organiza tu dia
+        - button "Agregar" [ref=e8]:
+          - img [ref=e9]
+          - text: Agregar
+      - generic [ref=e11]:
+        - generic [ref=e12]:
+          - heading "Hoy, Lunes 1" [level=2] [ref=e13]
+          - img [ref=e14]
+        - generic [ref=e17]:
+          - generic [ref=e18]:
+            - paragraph [ref=e19]: "6"
+            - paragraph [ref=e20]: Total
+          - generic [ref=e21]:
+            - paragraph [ref=e22]: "0"
+            - paragraph [ref=e23]: Completadas
+          - generic [ref=e24]:
+            - paragraph [ref=e25]: "6"
+            - paragraph [ref=e26]: Pendientes
+      - generic [ref=e27]:
+        - generic:
+          - img
+        - searchbox "Buscar tareas..." [ref=e28]
+      - generic [ref=e29]:
+        - button "📋 Todas" [ref=e30]:
+          - generic [ref=e31]: 📋
+          - text: Todas
+        - button "⚡ Micro-tarea" [active] [ref=e32]:
+          - generic [ref=e33]: ⚡
+          - text: Micro-tarea
+        - button "🕐 Recordatorio" [ref=e34]:
+          - generic [ref=e35]: 🕐
+          - text: Recordatorio
+        - button "🎯 Meta" [ref=e36]:
+          - generic [ref=e37]: 🎯
+          - text: Meta
+      - generic [ref=e76]:
+        - generic [ref=e162]:
+          - button "Eliminar tarea" [ref=e163]:
+            - img [ref=e164]
+          - generic [ref=e167]:
+            - button "Marcar como completada" [ref=e168]
+            - generic [ref=e169]:
+              - generic [ref=e170]:
+                - generic [ref=e171]: ⚡
+                - heading "Repasar apuntes de la clase de cálculo" [level=3] [ref=e172]
+              - generic [ref=e173]:
+                - generic [ref=e174]: Media
+                - generic [ref=e175]: Pendiente
+                - generic [ref=e177]: Micro-tarea
+          - button "Dividir con IA" [ref=e179]:
+            - img [ref=e180]
+            - text: Dividir con IA
+        - generic [ref=e258]:
+          - button "Eliminar tarea" [ref=e259]:
+            - img [ref=e260]
+          - generic [ref=e263]:
+            - button "Marcar como completada" [ref=e264]
+            - generic [ref=e265]:
+              - generic [ref=e266]:
+                - generic [ref=e267]: ⚡
+                - heading "Comprar víveres de la semana" [level=3] [ref=e268]
+              - generic [ref=e269]:
+                - generic [ref=e270]: Media
+                - generic [ref=e271]: Pendiente
+                - generic [ref=e273]: Micro-tarea
+          - button "Dividir con IA" [ref=e275]:
+            - img [ref=e276]
+            - text: Dividir con IA
+    - button "Agregar tarea" [ref=e39]:
+      - img [ref=e40]
+  - navigation [ref=e42]:
+    - link "Inicio" [ref=e43] [cursor=pointer]:
+      - /url: /
+      - img [ref=e44]
+      - generic [ref=e47]: Inicio
+    - link "Agenda" [ref=e48] [cursor=pointer]:
+      - /url: /agenda
+      - img [ref=e49]
+      - generic [ref=e52]: Agenda
+    - link "Bienestar" [ref=e53] [cursor=pointer]:
+      - /url: /bienestar
+      - img [ref=e54]
+      - generic [ref=e56]: Bienestar
+    - link "Comunidad" [ref=e57] [cursor=pointer]:
+      - /url: /comunidad
+      - img [ref=e58]
+      - generic [ref=e60]: Comunidad
+    - link "Perfil" [ref=e61] [cursor=pointer]:
+      - /url: /perfil
+      - img [ref=e62]
+      - generic [ref=e65]: Perfil
+  - button "Open Next.js Dev Tools" [ref=e71] [cursor=pointer]:
+    - img [ref=e72]
+  - alert [ref=e75]
