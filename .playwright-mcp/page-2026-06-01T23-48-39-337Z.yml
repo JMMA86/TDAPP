@@ -1,0 +1,85 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - heading "Comunidad" [level=1] [ref=e6]
+          - paragraph [ref=e7]: Conecta y aprende junto a otros
+        - button "Explorar grupos" [ref=e8]:
+          - img [ref=e9]
+      - generic [ref=e13]:
+        - generic [ref=e14]:
+          - heading "Tu comunidad" [level=2] [ref=e15]
+          - img [ref=e16]
+        - generic [ref=e20]:
+          - generic [ref=e21]:
+            - paragraph [ref=e22]: "3"
+            - paragraph [ref=e23]: Grupos
+          - generic [ref=e24]:
+            - paragraph [ref=e25]: "8"
+            - paragraph [ref=e26]: Conexiones
+          - generic [ref=e27]:
+            - paragraph [ref=e28]: "12"
+            - paragraph [ref=e29]: Conversaciones
+      - generic [ref=e30]:
+        - generic [ref=e31]:
+          - heading "Grupos de apoyo" [level=2] [ref=e32]
+          - button "Explorar" [ref=e33]:
+            - img [ref=e34]
+            - text: Explorar
+        - generic [ref=e38]:
+          - generic [ref=e40]:
+            - generic [ref=e41]:
+              - heading "TDAH Jovenes Adultos" [level=3] [ref=e42]
+              - paragraph [ref=e43]: Espacio seguro para compartir experiencias y estrategias
+              - generic [ref=e44]:
+                - generic [ref=e45]: 1247 miembros
+                - generic [ref=e46]: ·
+                - generic [ref=e47]: "Actividad: Hace 2h"
+            - generic [ref=e48]:
+              - generic [ref=e49]: Miembro
+              - button "Unido" [ref=e50]
+          - generic [ref=e52]:
+            - generic [ref=e53]:
+              - heading "Estrategias de Organizacion" [level=3] [ref=e54]
+              - paragraph [ref=e55]: Tips y trucos para mantenerse organizado
+              - generic [ref=e56]:
+                - generic [ref=e57]: 856 miembros
+                - generic [ref=e58]: ·
+                - generic [ref=e59]: "Actividad: Hace 5h"
+            - button "Unirse" [ref=e61]
+          - generic [ref=e63]:
+            - generic [ref=e64]:
+              - heading "Padres de Ninos Neurodivergentes" [level=3] [ref=e65]
+              - paragraph [ref=e66]: Apoyo para familias con hijos neurodivergentes
+              - generic [ref=e67]:
+                - generic [ref=e68]: 432 miembros
+                - generic [ref=e69]: ·
+                - generic [ref=e70]: "Actividad: Hace 1d"
+            - generic [ref=e71]:
+              - generic [ref=e72]: Miembro
+              - button "Unido" [ref=e73]
+  - navigation [ref=e74]:
+    - link "Inicio" [ref=e75] [cursor=pointer]:
+      - /url: /
+      - img [ref=e76]
+      - generic [ref=e79]: Inicio
+    - link "Agenda" [ref=e80] [cursor=pointer]:
+      - /url: /agenda
+      - img [ref=e81]
+      - generic [ref=e84]: Agenda
+    - link "Bienestar" [ref=e85] [cursor=pointer]:
+      - /url: /bienestar
+      - img [ref=e86]
+      - generic [ref=e88]: Bienestar
+    - link "Comunidad" [ref=e89] [cursor=pointer]:
+      - /url: /comunidad
+      - img [ref=e90]
+      - generic [ref=e92]: Comunidad
+    - link "Perfil" [ref=e93] [cursor=pointer]:
+      - /url: /perfil
+      - img [ref=e94]
+      - generic [ref=e97]: Perfil
+  - button "Open Next.js Dev Tools" [ref=e103] [cursor=pointer]:
+    - img [ref=e104]
+  - alert [ref=e107]
