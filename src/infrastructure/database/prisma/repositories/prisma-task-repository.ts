@@ -11,6 +11,8 @@ import type {
   TaskFilters,
   TaskStatus,
   Priority,
+  TaskType,
+  Difficulty,
 } from '@/core/application/ports/task-repository.interface';
 
 // ─── Mappers (transformación pura de estructuras, sin lógica de negocio) ──────
@@ -22,6 +24,7 @@ function toDomainTask(record: {
   description: string | null;
   status: PrismaTaskStatus;
   priority: string;
+  taskType: string;
   dueDate: Date | null;
   userId: string;
   createdAt: Date;
@@ -31,6 +34,8 @@ function toDomainTask(record: {
     title: string;
     isCompleted: boolean;
     orden: number;
+    difficulty: string;
+    estimatedMinutes: number;
     taskId: string;
     createdAt: Date;
   }[];
@@ -41,6 +46,7 @@ function toDomainTask(record: {
     description: record.description,
     status: record.status as TaskStatus,
     priority: record.priority as Priority,
+    taskType: record.taskType as TaskType,
     dueDate: record.dueDate,
     userId: record.userId,
     subTasks: record.subTasks?.map(toDomainSubTask),
@@ -55,6 +61,8 @@ function toDomainSubTask(record: {
   title: string;
   isCompleted: boolean;
   orden: number;
+  difficulty: string;
+  estimatedMinutes: number;
   taskId: string;
   createdAt: Date;
 }): SubTask {
@@ -63,6 +71,8 @@ function toDomainSubTask(record: {
     title: record.title,
     isCompleted: record.isCompleted,
     orden: record.orden,
+    difficulty: record.difficulty as Difficulty,
+    estimatedMinutes: record.estimatedMinutes,
     taskId: record.taskId,
     createdAt: record.createdAt,
   };
@@ -80,6 +90,7 @@ export class PrismaTaskRepository implements ITaskRepository {
         description: data.description ?? null,
         status: (data.status ?? 'PENDING') as PrismaTaskStatus,
         priority: (data.priority ?? 'MEDIUM') as Priority,
+        taskType: (data.taskType ?? 'MICRO_TASK') as 'MICRO_TASK' | 'REMINDER' | 'GOAL',
         dueDate: data.dueDate ?? null,
         userId,
       },
@@ -136,6 +147,8 @@ export class PrismaTaskRepository implements ITaskRepository {
       data: {
         title: data.title,
         orden: data.orden ?? 0,
+        difficulty: (data.difficulty ?? 'EASY') as 'EASY' | 'MEDIUM' | 'HARD',
+        estimatedMinutes: data.estimatedMinutes ?? 5,
         taskId,
       },
     });

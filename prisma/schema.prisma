@@ -32,6 +32,18 @@ enum Priority {
   HIGH
 }
 
+enum TaskType {
+  MICRO_TASK
+  REMINDER
+  GOAL
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
 // ─── Modelos ──────────────────────────────────────────────────────────────────
 
 model User {
@@ -55,6 +67,7 @@ model Task {
   description String?
   status      TaskStatus @default(PENDING)
   priority    Priority   @default(MEDIUM)
+  taskType    TaskType   @default(MICRO_TASK) @map("task_type")
   dueDate     DateTime?  @map("due_date")
   createdAt   DateTime   @default(now()) @map("created_at")
   updatedAt   DateTime   @updatedAt @map("updated_at")
@@ -70,11 +83,13 @@ model Task {
 }
 
 model SubTask {
-  id          String   @id @default(cuid())
-  title       String
-  isCompleted Boolean  @default(false) @map("is_completed")
-  orden       Int      @default(0)
-  createdAt   DateTime @default(now()) @map("created_at")
+  id               String     @id @default(cuid())
+  title            String
+  isCompleted      Boolean    @default(false) @map("is_completed")
+  orden            Int        @default(0)
+  difficulty       Difficulty @default(EASY)
+  estimatedMinutes Int        @default(5) @map("estimated_minutes")
+  createdAt        DateTime   @default(now()) @map("created_at")
 
   taskId String @map("task_id")
   task   Task   @relation(fields: [taskId], references: [id], onDelete: Cascade)

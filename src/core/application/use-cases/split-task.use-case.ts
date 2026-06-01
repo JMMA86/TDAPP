@@ -6,8 +6,9 @@ import type {
   ITaskRepository,
   Task,
   SubTask,
+  Difficulty,
 } from '@/core/application/ports/task-repository.interface';
-import type { IAiService } from '@/core/application/ports/ai-service.interface';
+import type { IAiService, AiMicroTask } from '@/core/application/ports/ai-service.interface';
 
 // ─── DTOs de entrada y salida ─────────────────────────────────────────────────
 
@@ -43,7 +44,7 @@ export class SplitTaskUseCase {
     }
 
     // Paso 2: Invocar la IA para fraccionar la tarea
-    let microTaskDescriptions: string[];
+    let microTaskDescriptions: AiMicroTask[];
     let aiFailed = false;
 
     try {
@@ -61,16 +62,19 @@ export class SplitTaskUseCase {
     const subTasks: SubTask[] = [];
 
     for (let i = 0; i < microTaskDescriptions.length; i++) {
+      const mt = microTaskDescriptions[i];
       try {
         const subTask = await this.taskRepository.createSubTask(task.id, {
-          title: microTaskDescriptions[i],
+          title: mt.title,
           orden: i,
+          difficulty: mapDifficulty(mt.difficulty),
+          estimatedMinutes: mt.estimatedMinutes,
         });
         subTasks.push(subTask);
       } catch (error) {
         // Si falla la persistencia de una subtarea, registramos y continuamos
         console.error(
-          `[SplitTaskUseCase] Error al persistir la micro-tarea "${microTaskDescriptions[i]}":`,
+          `[SplitTaskUseCase] Error al persistir la micro-tarea "${mt.title}":`,
           error,
         );
       }
@@ -82,5 +86,17 @@ export class SplitTaskUseCase {
       subTasks,
       aiFailed,
     };
+  }
+}
+
+/** Mapea la dificultad de la IA al enum del dominio. */
+function mapDifficulty(d: string): Difficulty {
+  switch (d) {
+    case 'medium':
+      return 'MEDIUM';
+    case 'hard':
+      return 'HARD';
+    default:
+      return 'EASY';
   }
 }

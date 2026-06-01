@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import type { FormEvent } from 'react';
 
 type TaskPriority = 'LOW' | 'MEDIUM' | 'HIGH';
+type TaskType = 'MICRO_TASK' | 'REMINDER' | 'GOAL';
 
 interface AddTaskModalProps {
   isOpen: boolean;
@@ -17,9 +18,16 @@ const priorityOptions: { value: TaskPriority; label: string }[] = [
   { value: 'HIGH', label: 'Alta' },
 ];
 
+const taskTypeOptions: { value: TaskType; label: string; icon: string }[] = [
+  { value: 'MICRO_TASK', label: 'Micro-tarea', icon: '⚡' },
+  { value: 'REMINDER', label: 'Recordatorio', icon: '🕐' },
+  { value: 'GOAL', label: 'Meta', icon: '🎯' },
+];
+
 export default function AddTaskModal({ isOpen, onClose, onTaskCreated }: AddTaskModalProps) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [taskType, setTaskType] = useState<TaskType>('MICRO_TASK');
   const [priority, setPriority] = useState<TaskPriority>('MEDIUM');
   const [dueDate, setDueDate] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -106,6 +114,7 @@ export default function AddTaskModal({ isOpen, onClose, onTaskCreated }: AddTask
           userId: 'demo-user',
           title: title.trim(),
           description: description.trim() || undefined,
+          taskType,
           priority,
           dueDate: dueDate || undefined,
         }),
@@ -209,6 +218,28 @@ export default function AddTaskModal({ isOpen, onClose, onTaskCreated }: AddTask
               className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-shadow resize-none"
             />
           </div>
+
+          {/* Tipo de tarea */}
+          <fieldset>
+            <legend className="block text-sm font-medium text-gray-700 mb-2">Tipo</legend>
+            <div className="flex gap-2">
+              {taskTypeOptions.map((opt) => (
+                <button
+                  key={opt.value}
+                  type="button"
+                  onClick={() => setTaskType(opt.value)}
+                  className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-colors ${
+                    taskType === opt.value
+                      ? 'bg-violet-500 text-white shadow-sm'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  }`}
+                >
+                  <span className="mr-1">{opt.icon}</span>
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          </fieldset>
 
           {/* Prioridad */}
           <fieldset>

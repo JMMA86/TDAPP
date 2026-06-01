@@ -11,7 +11,7 @@ const taskRepo = new PrismaTaskRepository(prisma);
 
 export async function POST(req: Request) {
   try {
-    const { userId, title, description, status, priority, dueDate } = await req.json();
+    const { userId, title, description, status, priority, taskType, dueDate } = await req.json();
 
     if (!userId || !title) {
       return Response.json({ error: 'userId y title son obligatorios' }, { status: 400 });
@@ -22,6 +22,7 @@ export async function POST(req: Request) {
       description,
       status,
       priority,
+      taskType,
       dueDate: dueDate ? new Date(dueDate) : undefined,
     });
 

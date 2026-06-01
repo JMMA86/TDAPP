@@ -1,0 +1,19 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    // Seguridad global: validación humana requerida para cambios destructivos
+    "edit": "allow",
+    "bash": "allow"
+  },
+  "mcp": {
+    "playwright": {
+      "type": "local",
+      "enabled": true,
+      "command": [
+        "npx",
+        "@playwright/mcp@latest"
+      ],
+      "timeout": 30000
+    }
+  }
+}

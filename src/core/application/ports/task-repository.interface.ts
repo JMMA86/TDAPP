@@ -10,6 +10,12 @@ export type TaskStatus = 'PENDING' | 'IN_PROGRESS' | 'COMPLETED' | 'ABANDONED';
 /** Prioridad de la tarea según REQUIREMENTS.md sección 3B. */
 export type Priority = 'LOW' | 'MEDIUM' | 'HIGH';
 
+/** Tipo de tarea: micro-tarea, recordatorio o meta. */
+export type TaskType = 'MICRO_TASK' | 'REMINDER' | 'GOAL';
+
+/** Dificultad de una subtarea. */
+export type Difficulty = 'EASY' | 'MEDIUM' | 'HARD';
+
 // ─── Entidades de dominio ─────────────────────────────────────────────────────
 
 /** Representación pura de una Task en el dominio. */
@@ -19,6 +25,7 @@ export interface Task {
   description: string | null;
   status: TaskStatus;
   priority: Priority;
+  taskType: TaskType;
   dueDate: Date | null;
   userId: string;
   subTasks?: SubTask[];
@@ -32,6 +39,8 @@ export interface SubTask {
   title: string;
   isCompleted: boolean;
   orden: number;
+  difficulty: Difficulty;
+  estimatedMinutes: number;
   taskId: string;
   createdAt: Date;
 }
@@ -44,6 +53,7 @@ export interface CreateTaskInput {
   description?: string | null;
   status?: TaskStatus;
   priority?: Priority;
+  taskType?: TaskType;
   dueDate?: Date | null;
 }
 
@@ -59,6 +69,8 @@ export interface TaskFilters {
 export interface CreateSubTaskInput {
   title: string;
   orden?: number;
+  difficulty?: Difficulty;
+  estimatedMinutes?: number;
 }
 
 // ─── Interfaz del puerto ──────────────────────────────────────────────────────

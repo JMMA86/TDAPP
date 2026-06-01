@@ -3,6 +3,13 @@
 // NO debe importar nada de infrastructure ni de ningún proveedor de IA específico.
 // Los casos de uso dependen únicamente de este contrato (inversión de dependencias).
 
+/** Micro-tarea generada por la IA con dificultad y tiempo estimado. */
+export interface AiMicroTask {
+  title: string;
+  difficulty: 'easy' | 'medium' | 'hard';
+  estimatedMinutes: number;
+}
+
 /**
  * Contrato del servicio de IA.
  *
@@ -19,12 +26,11 @@ export interface IAiService {
    * Según REQUIREMENTS.md (Módulo A, Función 2 — El Fraccionador de Tareas):
    * cuando el usuario expresa sentirse abrumado por una meta grande,
    * el agente debe descomponer ese bloque en 3-4 micro-tareas accionables
-   * de 5-15 minutos cada una.
+   * de 2-15 minutos cada una, con dificultad estimada.
    *
    * @param taskTitle - Título de la tarea principal que el usuario quiere fraccionar.
    * @param description - Descripción opcional con contexto adicional de la tarea.
-   * @returns Un array de strings, cada uno describiendo una micro-tarea accionable.
-   *          Se esperan entre 3 y 4 micro-tareas.
+   * @returns Un array de AiMicroTask, cada uno con título, dificultad y tiempo estimado.
    */
-  splitTask(taskTitle: string, description?: string): Promise<string[]>;
+  splitTask(taskTitle: string, description?: string): Promise<AiMicroTask[]>;
 }
