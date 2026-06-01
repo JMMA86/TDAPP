@@ -34,6 +34,8 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [showAddModal, setShowAddModal] = useState(false);
   const [modalKey, setModalKey] = useState(0);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filter, setFilter] = useState<'ALL' | 'ACTIVE' | 'COMPLETED'>('ACTIVE');
 
   const fetchTasks = async () => {
     try {
@@ -135,6 +137,18 @@ export default function Home() {
     }
   };
 
+  const filteredTasks = tasks
+    .filter((t) => {
+      if (filter === 'ACTIVE') return t.status !== 'COMPLETED' && t.status !== 'ABANDONED';
+      if (filter === 'COMPLETED') return t.status === 'COMPLETED';
+      return true;
+    })
+    .filter((t) => {
+      if (!searchQuery.trim()) return true;
+      const q = searchQuery.toLowerCase();
+      return t.title.toLowerCase().includes(q) || (t.description && t.description.toLowerCase().includes(q));
+    });
+
   return (
     <>
       <AgendaContainer>
@@ -174,8 +188,63 @@ export default function Home() {
                 Agregar tarea
               </button>
             </div>
+
+            <div className="relative mb-4">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg
+                  className="w-5 h-5 text-gray-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+              <input
+                type="search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Buscar tareas..."
+                className="w-full pl-10 pr-4 py-2.5 rounded-full border border-gray-200 focus:border-violet-400 focus:ring-2 focus:ring-violet-100 outline-none text-sm text-gray-700 placeholder-gray-400 transition-colors"
+              />
+            </div>
+
+            <div className="flex gap-2 mb-4">
+              <button
+                onClick={() => setFilter('ACTIVE')}
+                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                  filter === 'ACTIVE'
+                    ? 'bg-violet-500 text-white'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
+              >
+                Activas
+              </button>
+              <button
+                onClick={() => setFilter('COMPLETED')}
+                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                  filter === 'COMPLETED'
+                    ? 'bg-violet-500 text-white'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
+              >
+                Completadas
+              </button>
+              <button
+                onClick={() => setFilter('ALL')}
+                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                  filter === 'ALL'
+                    ? 'bg-violet-500 text-white'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
+              >
+                Todas
+              </button>
+            </div>
+
             <div className="space-y-3">
-              {tasks.map((task) => (
+              {filteredTasks.map((task) => (
                 <TaskCard
                   key={task.id}
                   task={task}
