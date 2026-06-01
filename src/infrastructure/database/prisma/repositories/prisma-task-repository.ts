@@ -174,4 +174,10 @@ export class PrismaTaskRepository implements ITaskRepository {
       data: { isCompleted: false },
     });
   }
+
+  async deleteTask(taskId: string): Promise<void> {
+    await this.prisma.task.delete({
+      where: { id: taskId },
+    });
+  }
 }

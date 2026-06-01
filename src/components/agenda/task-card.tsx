@@ -26,6 +26,7 @@ interface TaskCardProps {
   onSplitWithAI?: (taskId: string) => void;
   onStatusChange?: (taskId: string, newStatus: string) => void;
   onSubTaskToggle?: (subTaskId: string, isCompleted: boolean) => void;
+  onDelete?: (taskId: string) => void;
   isSplitting?: boolean;
 }
 
@@ -47,6 +48,7 @@ export default function TaskCard({
   onSplitWithAI,
   onStatusChange,
   onSubTaskToggle,
+  onDelete,
   isSplitting = false,
 }: TaskCardProps) {
   const isCompleted = task.status === 'COMPLETED';
@@ -68,8 +70,25 @@ export default function TaskCard({
     onSplitWithAI?.(task.id);
   };
 
+  const handleDelete = () => {
+    if (window.confirm('¿Eliminar esta tarea?')) {
+      onDelete?.(task.id);
+    }
+  };
+
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 transition-shadow hover:shadow-md">
+    <div className="relative bg-white rounded-2xl shadow-sm border border-gray-100 p-4 transition-shadow hover:shadow-md">
+      {/* Botón eliminar */}
+      <button
+        onClick={handleDelete}
+        aria-label="Eliminar tarea"
+        className="absolute top-3 right-3 p-1 text-gray-400 hover:text-red-500 transition-colors"
+      >
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
       <div className="flex items-start gap-3">
         {/* Checkbox circular */}
         <button

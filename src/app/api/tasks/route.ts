@@ -1,4 +1,4 @@
-// Route Handler: POST /api/tasks — Crear tarea | GET /api/tasks — Listar tareas | PATCH /api/tasks — Actualizar estado
+// Route Handler: POST /api/tasks — Crear tarea | GET /api/tasks — Listar tareas | PATCH /api/tasks — Actualizar estado | DELETE /api/tasks — Eliminar tarea
 // Controlador delgado: solo valida, invoca repositorio y formatea respuesta.
 
 import { prisma } from '@/infrastructure/database/prisma/client';
@@ -70,6 +70,22 @@ export async function PATCH(req: Request) {
     return Response.json(updatedTask, { status: 200 });
   } catch (error) {
     console.error('[PATCH /api/tasks] Error:', error);
+    return Response.json({ error: 'Error interno del servidor' }, { status: 500 });
+  }
+}
+
+export async function DELETE(req: Request) {
+  try {
+    const { taskId } = await req.json();
+
+    if (!taskId) {
+      return Response.json({ error: 'taskId es obligatorio' }, { status: 400 });
+    }
+
+    await taskRepo.deleteTask(taskId);
+    return Response.json({ success: true }, { status: 200 });
+  } catch (error) {
+    console.error('[DELETE /api/tasks] Error:', error);
     return Response.json({ error: 'Error interno del servidor' }, { status: 500 });
   }
 }

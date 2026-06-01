@@ -95,4 +95,7 @@ export interface ITaskRepository {
 
   /** Desmarca todas las subtareas de una tarea. */
   uncompleteAllSubTasks(taskId: string): Promise<void>;
+
+  /** Elimina una tarea y sus subtareas asociadas (CASCADE). */
+  deleteTask(taskId: string): Promise<void>;
 }

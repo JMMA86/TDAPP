@@ -87,6 +87,22 @@ export default function Home() {
     }
   };
 
+  const handleDelete = async (taskId: string) => {
+    try {
+      const res = await fetch('/api/tasks', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ taskId }),
+      });
+
+      if (!res.ok) throw new Error('Error al eliminar tarea');
+
+      await fetchTasks();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error al eliminar tarea');
+    }
+  };
+
   const handleSplitWithAI = async (taskId: string) => {
     const task = tasks.find((t) => t.id === taskId);
     if (!task) return;
@@ -166,6 +182,7 @@ export default function Home() {
                   onSplitWithAI={handleSplitWithAI}
                   onStatusChange={handleStatusChange}
                   onSubTaskToggle={handleSubTaskToggle}
+                  onDelete={handleDelete}
                   isSplitting={loadingTasks.has(task.id)}
                 />
               ))}
