@@ -21,6 +21,7 @@ export interface Task {
   priority: Priority;
   dueDate: Date | null;
   userId: string;
+  subTasks?: SubTask[];
   createdAt: Date;
   updatedAt: Date;
 }

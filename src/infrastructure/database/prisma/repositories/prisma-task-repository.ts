@@ -26,6 +26,14 @@ function toDomainTask(record: {
   userId: string;
   createdAt: Date;
   updatedAt: Date;
+  subTasks?: {
+    id: string;
+    title: string;
+    isCompleted: boolean;
+    orden: number;
+    taskId: string;
+    createdAt: Date;
+  }[];
 }): Task {
   return {
     id: record.id,
@@ -35,6 +43,7 @@ function toDomainTask(record: {
     priority: record.priority as Priority,
     dueDate: record.dueDate,
     userId: record.userId,
+    subTasks: record.subTasks?.map(toDomainSubTask),
     createdAt: record.createdAt,
     updatedAt: record.updatedAt,
   };
@@ -98,6 +107,7 @@ export class PrismaTaskRepository implements ITaskRepository {
     const records = await this.prisma.task.findMany({
       where,
       orderBy: { createdAt: 'desc' },
+      include: { subTasks: { orderBy: { orden: 'asc' } } },
     });
 
     return records.map(toDomainTask);
@@ -106,6 +116,7 @@ export class PrismaTaskRepository implements ITaskRepository {
   async getTaskById(taskId: string): Promise<Task | null> {
     const record = await this.prisma.task.findUnique({
       where: { id: taskId },
+      include: { subTasks: { orderBy: { orden: 'asc' } } },
     });
 
     return record ? toDomainTask(record) : null;
