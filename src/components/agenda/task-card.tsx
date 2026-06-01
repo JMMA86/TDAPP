@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import SkeletonTaskCard from './skeleton-task-card';
 
 type TaskStatus = 'PENDING' | 'IN_PROGRESS' | 'COMPLETED' | 'ABANDONED';
@@ -49,6 +50,7 @@ export default function TaskCard({
   isSplitting = false,
 }: TaskCardProps) {
   const isCompleted = task.status === 'COMPLETED';
+  const [showSubtasks, setShowSubtasks] = useState(true);
 
   if (isSplitting) {
     return <SkeletonTaskCard />;
@@ -126,29 +128,48 @@ export default function TaskCard({
 
       {/* Lista de subtareas (cuando ya fueron generadas) */}
       {task.subTasks && task.subTasks.length > 0 && (
-        <ul className="mt-3 space-y-1.5 border-t border-gray-100 pt-3">
-          {task.subTasks.map((sub) => (
-            <li key={sub.id} className="flex items-start gap-2 text-sm text-gray-600">
-              <button
-                onClick={() => onSubTaskToggle?.(sub.id, !sub.isCompleted)}
-                aria-label={sub.isCompleted ? 'Desmarcar paso' : 'Marcar paso como completado'}
-                className={[
-                  'mt-0.5 w-4 h-4 flex-shrink-0 rounded-full border-2 flex items-center justify-center transition-colors',
-                  sub.isCompleted
-                    ? 'bg-green-500 border-green-500'
-                    : 'border-gray-300 hover:border-violet-400',
-                ].join(' ')}
-              >
-                {sub.isCompleted && (
-                  <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                )}
-              </button>
-              <span className={sub.isCompleted ? 'line-through text-gray-400' : ''}>{sub.title}</span>
-            </li>
-          ))}
-        </ul>
+        <div className="mt-3 border-t border-gray-100 pt-3">
+          <button
+            onClick={() => setShowSubtasks((prev) => !prev)}
+            className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 transition-colors"
+          >
+            <svg
+              className={`w-3.5 h-3.5 transition-transform ${showSubtasks ? 'rotate-0' : '-rotate-90'}`}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2.5}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+            <span>{task.subTasks.length} pasos</span>
+          </button>
+          {showSubtasks && (
+            <ul className="mt-2 space-y-1.5">
+              {task.subTasks.map((sub) => (
+                <li key={sub.id} className="flex items-start gap-2 text-sm text-gray-600">
+                  <button
+                    onClick={() => onSubTaskToggle?.(sub.id, !sub.isCompleted)}
+                    aria-label={sub.isCompleted ? 'Desmarcar paso' : 'Marcar paso como completado'}
+                    className={[
+                      'mt-0.5 w-4 h-4 flex-shrink-0 rounded-full border-2 flex items-center justify-center transition-colors',
+                      sub.isCompleted
+                        ? 'bg-green-500 border-green-500'
+                        : 'border-gray-300 hover:border-violet-400',
+                    ].join(' ')}
+                  >
+                    {sub.isCompleted && (
+                      <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                    )}
+                  </button>
+                  <span className={sub.isCompleted ? 'line-through text-gray-400' : ''}>{sub.title}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       )}
 
       {/* Botón "Dividir con IA" — solo si no tiene subtareas aún */}
