@@ -1,0 +1,31 @@
+- generic [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e254]:
+      - generic [ref=e255]:
+        - heading "Comunidad" [level=1] [ref=e256]
+        - paragraph [ref=e257]: Conecta y aprende junto a otros
+      - paragraph [ref=e258]: Proximamente
+  - navigation [ref=e40]:
+    - link "Inicio" [ref=e41] [cursor=pointer]:
+      - /url: /
+      - img [ref=e42]
+      - generic [ref=e45]: Inicio
+    - link "Agenda" [ref=e46] [cursor=pointer]:
+      - /url: /agenda
+      - img [ref=e47]
+      - generic [ref=e50]: Agenda
+    - link "Bienestar" [ref=e51] [cursor=pointer]:
+      - /url: /bienestar
+      - img [ref=e52]
+      - generic [ref=e54]: Bienestar
+    - link "Comunidad" [active] [ref=e55] [cursor=pointer]:
+      - /url: /comunidad
+      - img [ref=e56]
+      - generic [ref=e58]: Comunidad
+    - link "Perfil" [ref=e59] [cursor=pointer]:
+      - /url: /perfil
+      - img [ref=e60]
+      - generic [ref=e63]: Perfil
+  - button "Open Next.js Dev Tools" [ref=e89] [cursor=pointer]:
+    - img [ref=e90]
+  - alert [ref=e93]

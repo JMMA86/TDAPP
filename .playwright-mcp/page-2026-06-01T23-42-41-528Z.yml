@@ -1,0 +1,159 @@
+- generic [ref=e1]:
+  - main [ref=e2]:
+    - main [ref=e94]:
+      - generic [ref=e95]:
+        - region "¿Cómo te sientes?" [ref=e96]:
+          - heading "¿Cómo te sientes hoy?" [level=2] [ref=e97]
+          - radiogroup "Selecciona tu estado de ánimo" [ref=e98]:
+            - radio "Muy mal" [ref=e99]:
+              - generic [ref=e100]: 😫
+            - radio "Mal" [ref=e101]:
+              - generic [ref=e102]: 😟
+            - radio "Regular" [ref=e103]:
+              - generic [ref=e104]: 😐
+            - radio "Bien" [ref=e105]:
+              - generic [ref=e106]: 🙂
+            - radio "Muy bien" [ref=e107]:
+              - generic [ref=e108]: 😄
+        - generic [ref=e109]:
+          - generic [ref=e110]:
+            - heading "Mi Agenda" [level=1] [ref=e111]
+            - button "Agregar tarea" [ref=e112]:
+              - img [ref=e113]
+              - text: Agregar tarea
+          - generic [ref=e115]:
+            - generic:
+              - img
+            - searchbox "Buscar tareas..." [ref=e116]
+          - generic [ref=e117]:
+            - button "Activas" [ref=e118]
+            - button "Completadas" [ref=e119]
+            - button "Todas" [ref=e120]
+          - generic [ref=e121]:
+            - generic [ref=e122]:
+              - button "Eliminar tarea" [ref=e123]:
+                - img [ref=e124]
+              - generic [ref=e127]:
+                - button "Marcar como completada" [ref=e128]
+                - generic [ref=e129]:
+                  - heading "Preparar presentación de la universidad" [level=3] [ref=e130]
+                  - generic [ref=e131]:
+                    - generic [ref=e132]: Baja
+                    - generic [ref=e133]: En progreso
+              - generic [ref=e135]:
+                - button "4 pasos" [ref=e136]:
+                  - img [ref=e137]
+                  - generic [ref=e139]: 4 pasos
+                - list [ref=e140]:
+                  - listitem [ref=e141]:
+                    - button "Marcar paso como completado" [ref=e142]
+                    - generic [ref=e143]: Revisar el temario y seleccionar los puntos principales
+                  - listitem [ref=e144]:
+                    - button "Marcar paso como completado" [ref=e145]
+                    - generic [ref=e146]: Buscar imágenes y gráficos para apoyar los puntos
+                  - listitem [ref=e147]:
+                    - button "Marcar paso como completado" [ref=e148]
+                    - generic [ref=e149]: Crear las diapositivas con una idea por slide
+                  - listitem [ref=e150]:
+                    - button "Marcar paso como completado" [ref=e151]
+                    - generic [ref=e152]: Practicar la exposición en voz alta 2 veces
+            - generic [ref=e153]:
+              - button "Eliminar tarea" [ref=e154]:
+                - img [ref=e155]
+              - generic [ref=e158]:
+                - button "Marcar como completada" [ref=e159]
+                - generic [ref=e160]:
+                  - heading "Tomar agua cada 2 horas" [level=3] [ref=e161]
+                  - generic [ref=e162]:
+                    - generic [ref=e163]: Baja
+                    - generic [ref=e164]: Pendiente
+              - button "Dividir con IA" [ref=e167]:
+                - img [ref=e168]
+                - text: Dividir con IA
+            - generic [ref=e170]:
+              - button "Eliminar tarea" [ref=e171]:
+                - img [ref=e172]
+              - generic [ref=e175]:
+                - button "Marcar como completada" [ref=e176]
+                - generic [ref=e177]:
+                  - heading "Repasar apuntes de la clase de cálculo" [level=3] [ref=e178]
+                  - generic [ref=e179]:
+                    - generic [ref=e180]: Media
+                    - generic [ref=e181]: Pendiente
+              - button "Dividir con IA" [ref=e184]:
+                - img [ref=e185]
+                - text: Dividir con IA
+            - generic [ref=e187]:
+              - button "Eliminar tarea" [ref=e188]:
+                - img [ref=e189]
+              - generic [ref=e192]:
+                - button "Marcar como completada" [ref=e193]
+                - generic [ref=e194]:
+                  - heading "Llamar al especialista médico" [level=3] [ref=e195]
+                  - generic [ref=e196]:
+                    - generic [ref=e197]: Alta
+                    - generic [ref=e198]: Pendiente
+              - button "Dividir con IA" [ref=e201]:
+                - img [ref=e202]
+                - text: Dividir con IA
+            - generic [ref=e204]:
+              - button "Eliminar tarea" [ref=e205]:
+                - img [ref=e206]
+              - generic [ref=e209]:
+                - button "Marcar como completada" [ref=e210]
+                - generic [ref=e211]:
+                  - heading "Escribir marco teórico de la tesis" [level=3] [ref=e212]
+                  - generic [ref=e213]:
+                    - generic [ref=e214]: Alta
+                    - generic [ref=e215]: Pendiente
+              - generic [ref=e217]:
+                - button "3 pasos" [ref=e218]:
+                  - img [ref=e219]
+                  - generic [ref=e221]: 3 pasos
+                - list [ref=e222]:
+                  - listitem [ref=e223]:
+                    - button "Marcar paso como completado" [ref=e224]
+                    - generic [ref=e225]: Buscar 5 papers académicos en Google Scholar
+                  - listitem [ref=e226]:
+                    - button "Marcar paso como completado" [ref=e227]
+                    - generic [ref=e228]: Leer abstracts y marcar ideas clave
+                  - listitem [ref=e229]:
+                    - button "Marcar paso como completado" [ref=e230]
+                    - generic [ref=e231]: Escribir primer borrador de 300 palabras
+            - generic [ref=e232]:
+              - button "Eliminar tarea" [ref=e233]:
+                - img [ref=e234]
+              - generic [ref=e237]:
+                - button "Marcar como completada" [ref=e238]
+                - generic [ref=e239]:
+                  - heading "Comprar víveres de la semana" [level=3] [ref=e240]
+                  - generic [ref=e241]:
+                    - generic [ref=e242]: Media
+                    - generic [ref=e243]: Pendiente
+              - button "Dividir con IA" [ref=e246]:
+                - img [ref=e247]
+                - text: Dividir con IA
+  - navigation [ref=e40]:
+    - link "Inicio" [ref=e41] [cursor=pointer]:
+      - /url: /
+      - img [ref=e42]
+      - generic [ref=e45]: Inicio
+    - link "Agenda" [active] [ref=e46] [cursor=pointer]:
+      - /url: /agenda
+      - img [ref=e47]
+      - generic [ref=e50]: Agenda
+    - link "Bienestar" [ref=e51] [cursor=pointer]:
+      - /url: /bienestar
+      - img [ref=e52]
+      - generic [ref=e54]: Bienestar
+    - link "Comunidad" [ref=e55] [cursor=pointer]:
+      - /url: /comunidad
+      - img [ref=e56]
+      - generic [ref=e58]: Comunidad
+    - link "Perfil" [ref=e59] [cursor=pointer]:
+      - /url: /perfil
+      - img [ref=e60]
+      - generic [ref=e63]: Perfil
+  - button "Open Next.js Dev Tools" [ref=e89] [cursor=pointer]:
+    - img [ref=e90]
+  - alert [ref=e93]

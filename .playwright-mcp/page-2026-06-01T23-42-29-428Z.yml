@@ -1,0 +1,54 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - heading "Hola, Alex!" [level=1] [ref=e6]
+          - paragraph [ref=e7]: Como te sientes hoy?
+        - button "Configuracion" [ref=e8]:
+          - img [ref=e9]
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - heading "Estado de animo" [level=2] [ref=e14]
+          - img [ref=e15]
+        - generic [ref=e17]:
+          - button "Registrar estado de animo" [ref=e18]: 😊
+          - button "Registrar estado de animo" [ref=e19]: 😐
+          - button "Registrar estado de animo" [ref=e20]: 😔
+          - button "Registrar estado de animo" [ref=e21]: 😰
+          - button "Registrar estado de animo" [ref=e22]: 😴
+        - paragraph [ref=e23]: Toca para registrar como te sientes ahora
+      - generic [ref=e24]:
+        - link "Respira 2 min" [ref=e25] [cursor=pointer]:
+          - /url: /bienestar
+          - img [ref=e26]
+          - paragraph [ref=e28]: Respira
+          - paragraph [ref=e29]: 2 min
+        - button "Micro-tarea Facil" [ref=e30]:
+          - img [ref=e31]
+          - paragraph [ref=e35]: Micro-tarea
+          - paragraph [ref=e36]: Facil
+      - generic [ref=e37]:
+        - heading "Progreso de hoy" [level=2] [ref=e38]
+        - paragraph [ref=e39]: Cargando...
+  - navigation [ref=e40]:
+    - link "Inicio" [ref=e41] [cursor=pointer]:
+      - /url: /
+      - img [ref=e42]
+      - generic [ref=e45]: Inicio
+    - link "Agenda" [ref=e46] [cursor=pointer]:
+      - /url: /agenda
+      - img [ref=e47]
+      - generic [ref=e50]: Agenda
+    - link "Bienestar" [ref=e51] [cursor=pointer]:
+      - /url: /bienestar
+      - img [ref=e52]
+      - generic [ref=e54]: Bienestar
+    - link "Comunidad" [ref=e55] [cursor=pointer]:
+      - /url: /comunidad
+      - img [ref=e56]
+      - generic [ref=e58]: Comunidad
+    - link "Perfil" [ref=e59] [cursor=pointer]:
+      - /url: /perfil
+      - img [ref=e60]
+      - generic [ref=e63]: Perfil
