@@ -26,7 +26,6 @@ export default function Home() {
       .catch(() => setLoading(false));
   }, []);
 
-  const activeTasks = tasks.filter((t) => t.status !== 'COMPLETED' && t.status !== 'ABANDONED');
   const completedTasks = tasks.filter((t) => t.status === 'COMPLETED');
   const totalSteps = tasks.reduce((sum, t) => sum + (t.subTasks?.length || 0), 0);
   const completedSteps = tasks.reduce(

@@ -165,7 +165,7 @@ export default function AgendaPage() {
       return t.title.toLowerCase().includes(q) || (t.description && t.description.toLowerCase().includes(q));
     });
 
-  const { dayName, date, month } = getDayInfo();
+  const { dayName, date } = getDayInfo();
   const totalTasks = tasks.length;
   const completedTasks = tasks.filter((t) => t.status === 'COMPLETED').length;
   const pendingTasks = tasks.filter((t) => t.status !== 'COMPLETED').length;
