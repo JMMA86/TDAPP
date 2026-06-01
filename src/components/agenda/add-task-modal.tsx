@@ -191,7 +191,7 @@ export default function AddTaskModal({ isOpen, onClose, onTaskCreated }: AddTask
               onChange={(e) => setTitle(e.target.value)}
               placeholder="¿Qué necesitas hacer?"
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-violet-400 focus:border-transparent transition-shadow"
+              className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-shadow"
             />
           </div>
 
@@ -206,7 +206,7 @@ export default function AddTaskModal({ isOpen, onClose, onTaskCreated }: AddTask
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Detalles adicionales..."
               rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-violet-400 focus:border-transparent transition-shadow resize-none"
+              className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-shadow resize-none"
             />
           </div>
 
@@ -241,7 +241,7 @@ export default function AddTaskModal({ isOpen, onClose, onTaskCreated }: AddTask
               type="date"
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-violet-400 focus:border-transparent transition-shadow"
+              className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-shadow"
             />
           </div>
 

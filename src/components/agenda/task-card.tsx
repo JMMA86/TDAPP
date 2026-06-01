@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SkeletonTaskCard from './skeleton-task-card';
 
 type TaskStatus = 'PENDING' | 'IN_PROGRESS' | 'COMPLETED' | 'ABANDONED';
@@ -53,6 +53,7 @@ export default function TaskCard({
 }: TaskCardProps) {
   const isCompleted = task.status === 'COMPLETED';
   const [showSubtasks, setShowSubtasks] = useState(true);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   if (isSplitting) {
     return <SkeletonTaskCard />;
@@ -70,22 +71,62 @@ export default function TaskCard({
     onSplitWithAI?.(task.id);
   };
 
-  const handleDelete = () => {
-    if (window.confirm('¿Eliminar esta tarea?')) {
-      onDelete?.(task.id);
-    }
-  };
+  useEffect(() => {
+    if (!showDeleteConfirm) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setShowDeleteConfirm(false);
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [showDeleteConfirm]);
 
   return (
+    <>
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
+          <div
+            className="absolute inset-0 bg-black/30"
+            onClick={() => setShowDeleteConfirm(false)}
+            aria-hidden="true"
+          />
+          <div className="relative bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4">
+            <h3 className="text-lg font-semibold text-gray-800">¿Eliminar esta tarea?</h3>
+            <p className="mt-1 text-sm text-gray-500 truncate">{task.title}</p>
+            <p className="mt-2 text-sm text-gray-500">Esta acción no se puede deshacer</p>
+            <div className="flex gap-3 mt-5">
+              <button
+                autoFocus
+                onClick={() => setShowDeleteConfirm(false)}
+                className="flex-1 py-2.5 px-4 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={() => {
+                  setShowDeleteConfirm(false);
+                  onDelete?.(task.id);
+                }}
+                className="flex-1 py-2.5 px-4 rounded-full text-sm font-medium bg-red-500 text-white hover:bg-red-600 transition-colors"
+              >
+                Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    
     <div className="relative bg-white rounded-2xl shadow-sm border border-gray-100 p-4 transition-shadow hover:shadow-md">
       {/* Botón eliminar */}
       <button
-        onClick={handleDelete}
+        onClick={() => setShowDeleteConfirm(true)}
         aria-label="Eliminar tarea"
-        className="absolute top-3 right-3 p-1 text-gray-400 hover:text-red-500 transition-colors"
+        className="absolute top-3 right-3 p-1 text-red-400 hover:text-red-600 transition-colors"
       >
-        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14" />
+          <path d="M10 11v6M14 11v6" />
         </svg>
       </button>
 
@@ -212,5 +253,6 @@ export default function TaskCard({
           </div>
         )}
     </div>
+    </>
   );
 }
