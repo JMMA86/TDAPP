@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@prisma/client": "^7.8.0",
     "ai": "^6.0.194",
     "ai-sdk-ollama": "^3.8.4",
     "next": "16.2.7",
@@ -21,10 +22,12 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
+    "dotenv": "^17.4.2",
     "eslint": "^9",
     "eslint-config-next": "16.2.7",
     "eslint-config-prettier": "^10.1.8",
     "prettier": "^3.8.3",
+    "prisma": "^7.8.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

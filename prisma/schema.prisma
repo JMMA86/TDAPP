@@ -1,0 +1,98 @@
+// TDApp — Schema Prisma (PostgreSQL)
+// Fuente de verdad: REQUIREMENTS.md sección 5
+// Convención: tablas y columnas en snake_case vía @map / @@map
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Enums ────────────────────────────────────────────────────────────────────
+
+enum Role {
+  STUDENT
+  PSYCHOLOGIST
+  ADMIN
+}
+
+enum TaskStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  ABANDONED
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+// ─── Modelos ──────────────────────────────────────────────────────────────────
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String?
+  passwordHash String?  @map("password_hash")
+  role         Role     @default(STUDENT)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  tasks       Task[]
+  moodEntries MoodEntry[]
+
+  @@map("users")
+}
+
+model Task {
+  id          String     @id @default(cuid())
+  title       String
+  description String?
+  status      TaskStatus @default(PENDING)
+  priority    Priority   @default(MEDIUM)
+  dueDate     DateTime?  @map("due_date")
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+
+  userId String @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  subTasks SubTask[]
+
+  @@index([userId, status])
+  @@index([userId, dueDate])
+  @@map("tasks")
+}
+
+model SubTask {
+  id          String   @id @default(cuid())
+  title       String
+  isCompleted Boolean  @default(false) @map("is_completed")
+  orden       Int      @default(0)
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  taskId String @map("task_id")
+  task   Task   @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@index([taskId])
+  @@map("sub_tasks")
+}
+
+model MoodEntry {
+  id        String   @id @default(cuid())
+  score     Int      // Escala 1-5 según REQUIREMENTS.md sección 3C
+  note      String?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  userId String @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@map("mood_entries")
+}
