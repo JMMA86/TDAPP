@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import SkeletonTaskCard from './skeleton-task-card';
 
 type TaskStatus = 'PENDING' | 'IN_PROGRESS' | 'COMPLETED' | 'ABANDONED';
@@ -16,6 +15,7 @@ interface Task {
 interface TaskCardProps {
   task: Task;
   onSplitWithAI?: (taskId: string) => void;
+  onStatusChange?: (taskId: string, newStatus: string) => void;
   isSplitting?: boolean;
 }
 
@@ -32,8 +32,13 @@ const priorityConfig: Record<TaskPriority, { label: string; badge: string }> = {
   HIGH: { label: 'Alta', badge: 'bg-orange-100 text-orange-700' },
 };
 
-export default function TaskCard({ task, onSplitWithAI, isSplitting = false }: TaskCardProps) {
-  const [completed, setCompleted] = useState(task.status === 'COMPLETED');
+export default function TaskCard({
+  task,
+  onSplitWithAI,
+  onStatusChange,
+  isSplitting = false,
+}: TaskCardProps) {
+  const isCompleted = task.status === 'COMPLETED';
 
   if (isSplitting) {
     return <SkeletonTaskCard />;
@@ -41,6 +46,11 @@ export default function TaskCard({ task, onSplitWithAI, isSplitting = false }: T
 
   const status = statusConfig[task.status];
   const priority = priorityConfig[task.priority];
+
+  const handleCheckboxClick = () => {
+    const newStatus = isCompleted ? 'PENDING' : 'COMPLETED';
+    onStatusChange?.(task.id, newStatus);
+  };
 
   const handleSplit = () => {
     onSplitWithAI?.(task.id);
@@ -51,16 +61,16 @@ export default function TaskCard({ task, onSplitWithAI, isSplitting = false }: T
       <div className="flex items-start gap-3">
         {/* Checkbox circular */}
         <button
-          onClick={() => setCompleted(!completed)}
-          aria-label={completed ? 'Marcar como pendiente' : 'Marcar como completada'}
+          onClick={handleCheckboxClick}
+          aria-label={isCompleted ? 'Marcar como pendiente' : 'Marcar como completada'}
           className={[
             'w-8 h-8 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors mt-0.5',
-            completed
+            isCompleted
               ? 'bg-green-500 border-green-500 text-white'
               : 'border-gray-300 hover:border-violet-400',
           ].join(' ')}
         >
-          {completed && (
+          {isCompleted && (
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
             </svg>
@@ -72,7 +82,7 @@ export default function TaskCard({ task, onSplitWithAI, isSplitting = false }: T
           <h3
             className={[
               'text-sm font-medium leading-snug line-clamp-2',
-              completed ? 'text-gray-400 line-through' : 'text-gray-800',
+              isCompleted ? 'text-gray-400 line-through' : 'text-gray-800',
             ].join(' ')}
           >
             {task.title}

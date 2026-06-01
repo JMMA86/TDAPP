@@ -41,6 +41,22 @@ export default function Home() {
     }
   };
 
+  const handleStatusChange = async (taskId: string, newStatus: string) => {
+    try {
+      const res = await fetch('/api/tasks', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ taskId, status: newStatus }),
+      });
+
+      if (!res.ok) throw new Error('Error al actualizar estado');
+
+      await fetchTasks();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error al actualizar estado');
+    }
+  };
+
   const handleSplitWithAI = async (taskId: string) => {
     const task = tasks.find((t) => t.id === taskId);
     if (!task) return;
@@ -95,6 +111,7 @@ export default function Home() {
                   key={task.id}
                   task={task}
                   onSplitWithAI={handleSplitWithAI}
+                  onStatusChange={handleStatusChange}
                   isSplitting={loadingTasks.has(task.id)}
                 />
               ))}
