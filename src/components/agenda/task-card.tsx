@@ -55,6 +55,17 @@ export default function TaskCard({
   const [showSubtasks, setShowSubtasks] = useState(true);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
+  useEffect(() => {
+    if (!showDeleteConfirm) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setShowDeleteConfirm(false);
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [showDeleteConfirm]);
+
   if (isSplitting) {
     return <SkeletonTaskCard />;
   }
@@ -70,17 +81,6 @@ export default function TaskCard({
   const handleSplit = () => {
     onSplitWithAI?.(task.id);
   };
-
-  useEffect(() => {
-    if (!showDeleteConfirm) return;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setShowDeleteConfirm(false);
-    };
-
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [showDeleteConfirm]);
 
   return (
     <>
