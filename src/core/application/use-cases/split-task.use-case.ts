@@ -13,9 +13,8 @@ import type { IAiService } from '@/core/application/ports/ai-service.interface';
 
 /** Datos de entrada para el caso de uso de fraccionamiento de tareas. */
 export interface SplitTaskInput {
+  taskId: string;
   userId: string;
-  taskTitle: string;
-  description?: string;
 }
 
 /** Resultado del caso de uso: tarea padre + micro-tareas generadas. */
@@ -30,19 +29,6 @@ export interface SplitTaskOutput {
 
 // ─── Caso de uso ──────────────────────────────────────────────────────────────
 
-/**
- * Caso de uso para fraccionar una tarea abrumadora en micro-tareas accionables.
- *
- * Flujo:
- * 1. Crea la tarea padre en el repositorio con estado PENDING y prioridad MEDIUM.
- * 2. Invoca el servicio de IA para obtener descripciones de micro-tareas.
- * 3. Persiste cada micro-tarea como SubTask de la tarea padre.
- * 4. Retorna la tarea padre junto con sus micro-tareas.
- *
- * Manejo de errores:
- * Si la IA falla, la tarea padre se conserva creada y se retorna con subTasks vacío.
- * Esto garantiza que el usuario no pierda su tarea aunque la IA no esté disponible.
- */
 export class SplitTaskUseCase {
   constructor(
     private readonly taskRepository: ITaskRepository,
@@ -50,13 +36,11 @@ export class SplitTaskUseCase {
   ) {}
 
   async execute(input: SplitTaskInput): Promise<SplitTaskOutput> {
-    // Paso 1: Crear la tarea padre
-    const task = await this.taskRepository.createTask(input.userId, {
-      title: input.taskTitle,
-      description: input.description ?? null,
-      status: 'PENDING',
-      priority: 'MEDIUM',
-    });
+    // Paso 1: Obtener la tarea existente (no crear una nueva)
+    const task = await this.taskRepository.getTaskById(input.taskId);
+    if (!task) {
+      throw new Error(`Tarea con id ${input.taskId} no encontrada`);
+    }
 
     // Paso 2: Invocar la IA para fraccionar la tarea
     let microTaskDescriptions: string[];
@@ -64,15 +48,11 @@ export class SplitTaskUseCase {
 
     try {
       microTaskDescriptions = await this.aiService.splitTask(
-        input.taskTitle,
-        input.description,
+        task.title,
+        task.description ?? undefined,
       );
     } catch (error) {
-      // Si la IA falla, registramos el error pero conservamos la tarea padre
-      console.error(
-        '[SplitTaskUseCase] Error al invocar la IA para fraccionar la tarea:',
-        error,
-      );
+      console.error('[SplitTaskUseCase] Error al invocar la IA para fraccionar la tarea:', error);
       aiFailed = true;
       microTaskDescriptions = [];
     }

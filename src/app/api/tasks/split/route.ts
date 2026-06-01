@@ -12,16 +12,16 @@ const splitTaskUseCase = new SplitTaskUseCase(taskRepo, aiService);
 
 export async function POST(req: Request) {
   try {
-    const { userId, taskTitle, description } = await req.json();
+    const { userId, taskId } = await req.json();
 
-    if (!userId || !taskTitle) {
+    if (!userId || !taskId) {
       return Response.json(
-        { error: 'userId y taskTitle son obligatorios' },
+        { error: 'userId y taskId son obligatorios' },
         { status: 400 },
       );
     }
 
-    const result = await splitTaskUseCase.execute({ userId, taskTitle, description });
+    const result = await splitTaskUseCase.execute({ userId, taskId });
     return Response.json(result, { status: 201 });
   } catch (error) {
     console.error('[POST /api/tasks/split] Error:', error);

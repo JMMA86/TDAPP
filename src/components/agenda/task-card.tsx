@@ -5,17 +5,26 @@ import SkeletonTaskCard from './skeleton-task-card';
 type TaskStatus = 'PENDING' | 'IN_PROGRESS' | 'COMPLETED' | 'ABANDONED';
 type TaskPriority = 'LOW' | 'MEDIUM' | 'HIGH';
 
+interface SubTask {
+  id: string;
+  title: string;
+  isCompleted: boolean;
+  orden: number;
+}
+
 interface Task {
   id: string;
   title: string;
   status: TaskStatus;
   priority: TaskPriority;
+  subTasks?: SubTask[];
 }
 
 interface TaskCardProps {
   task: Task;
   onSplitWithAI?: (taskId: string) => void;
   onStatusChange?: (taskId: string, newStatus: string) => void;
+  onSubTaskToggle?: (subTaskId: string, isCompleted: boolean) => void;
   isSplitting?: boolean;
 }
 
@@ -36,6 +45,7 @@ export default function TaskCard({
   task,
   onSplitWithAI,
   onStatusChange,
+  onSubTaskToggle,
   isSplitting = false,
 }: TaskCardProps) {
   const isCompleted = task.status === 'COMPLETED';
@@ -114,24 +124,53 @@ export default function TaskCard({
         </div>
       </div>
 
-      {/* Botón "Dividir con IA" */}
-      {task.status !== 'COMPLETED' && task.status !== 'ABANDONED' && (
-        <div className="mt-3">
-          <button
-            onClick={handleSplit}
-            className="inline-flex items-center gap-1.5 px-4 py-2 bg-violet-500 hover:bg-violet-600 text-white text-sm font-medium rounded-full transition-colors"
-          >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z"
-              />
-            </svg>
-            Dividir con IA
-          </button>
-        </div>
+      {/* Lista de subtareas (cuando ya fueron generadas) */}
+      {task.subTasks && task.subTasks.length > 0 && (
+        <ul className="mt-3 space-y-1.5 border-t border-gray-100 pt-3">
+          {task.subTasks.map((sub) => (
+            <li key={sub.id} className="flex items-start gap-2 text-sm text-gray-600">
+              <button
+                onClick={() => onSubTaskToggle?.(sub.id, !sub.isCompleted)}
+                aria-label={sub.isCompleted ? 'Desmarcar paso' : 'Marcar paso como completado'}
+                className={[
+                  'mt-0.5 w-4 h-4 flex-shrink-0 rounded-full border-2 flex items-center justify-center transition-colors',
+                  sub.isCompleted
+                    ? 'bg-green-500 border-green-500'
+                    : 'border-gray-300 hover:border-violet-400',
+                ].join(' ')}
+              >
+                {sub.isCompleted && (
+                  <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                )}
+              </button>
+              <span className={sub.isCompleted ? 'line-through text-gray-400' : ''}>{sub.title}</span>
+            </li>
+          ))}
+        </ul>
       )}
+
+      {/* Botón "Dividir con IA" — solo si no tiene subtareas aún */}
+      {task.status !== 'COMPLETED' &&
+        task.status !== 'ABANDONED' &&
+        (!task.subTasks || task.subTasks.length === 0) && (
+          <div className="mt-3">
+            <button
+              onClick={handleSplit}
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-violet-500 hover:bg-violet-600 text-white text-sm font-medium rounded-full transition-colors"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z"
+                />
+              </svg>
+              Dividir con IA
+            </button>
+          </div>
+        )}
     </div>
   );
 }

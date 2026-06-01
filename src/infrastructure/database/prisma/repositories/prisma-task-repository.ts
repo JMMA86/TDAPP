@@ -151,4 +151,27 @@ export class PrismaTaskRepository implements ITaskRepository {
 
     return records.map(toDomainSubTask);
   }
+
+  async updateSubTaskStatus(subTaskId: string, isCompleted: boolean): Promise<SubTask> {
+    const record = await this.prisma.subTask.update({
+      where: { id: subTaskId },
+      data: { isCompleted },
+    });
+
+    return toDomainSubTask(record);
+  }
+
+  async completeAllSubTasks(taskId: string): Promise<void> {
+    await this.prisma.subTask.updateMany({
+      where: { taskId },
+      data: { isCompleted: true },
+    });
+  }
+
+  async uncompleteAllSubTasks(taskId: string): Promise<void> {
+    await this.prisma.subTask.updateMany({
+      where: { taskId },
+      data: { isCompleted: false },
+    });
+  }
 }

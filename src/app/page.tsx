@@ -8,6 +8,13 @@ import TaskCard from '@/components/agenda/task-card';
 type TaskStatus = 'PENDING' | 'IN_PROGRESS' | 'COMPLETED' | 'ABANDONED';
 type TaskPriority = 'LOW' | 'MEDIUM' | 'HIGH';
 
+interface SubTask {
+  id: string;
+  title: string;
+  isCompleted: boolean;
+  orden: number;
+}
+
 interface Task {
   id: string;
   title: string;
@@ -16,6 +23,7 @@ interface Task {
   priority: TaskPriority;
   dueDate: string | null;
   createdAt: string;
+  subTasks?: SubTask[];
 }
 
 export default function Home() {
@@ -57,6 +65,22 @@ export default function Home() {
     }
   };
 
+  const handleSubTaskToggle = async (subTaskId: string, isCompleted: boolean) => {
+    try {
+      const res = await fetch('/api/tasks/subtasks', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ subTaskId, isCompleted }),
+      });
+
+      if (!res.ok) throw new Error('Error al actualizar el paso');
+
+      await fetchTasks();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error al actualizar el paso');
+    }
+  };
+
   const handleSplitWithAI = async (taskId: string) => {
     const task = tasks.find((t) => t.id === taskId);
     if (!task) return;
@@ -67,10 +91,15 @@ export default function Home() {
       const res = await fetch('/api/tasks/split', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId: 'demo-user', taskTitle: task.title }),
+        body: JSON.stringify({ userId: 'demo-user', taskId }),
       });
 
       if (!res.ok) throw new Error('Error al dividir tarea');
+
+      const data = await res.json();
+      if (data.aiFailed) {
+        setError('La IA no está disponible ahora mismo. Asegúrate de que Ollama esté corriendo.');
+      }
 
       await fetchTasks();
     } catch (err) {
@@ -112,6 +141,7 @@ export default function Home() {
                   task={task}
                   onSplitWithAI={handleSplitWithAI}
                   onStatusChange={handleStatusChange}
+                  onSubTaskToggle={handleSubTaskToggle}
                   isSplitting={loadingTasks.has(task.id)}
                 />
               ))}

@@ -60,6 +60,13 @@ export async function PATCH(req: Request) {
     }
 
     const updatedTask = await taskRepo.updateTaskStatus(taskId, status as TaskStatus);
+
+    if (status === 'COMPLETED') {
+      await taskRepo.completeAllSubTasks(taskId);
+    } else if (status === 'PENDING') {
+      await taskRepo.uncompleteAllSubTasks(taskId);
+    }
+
     return Response.json(updatedTask, { status: 200 });
   } catch (error) {
     console.error('[PATCH /api/tasks] Error:', error);

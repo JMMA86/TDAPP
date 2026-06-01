@@ -86,4 +86,13 @@ export interface ITaskRepository {
 
   /** Obtiene todas las subtareas de una tarea, ordenadas por `orden`. */
   getSubTasksByTask(taskId: string): Promise<SubTask[]>;
+
+  /** Marca o desmarca una subtarea individual como completada. */
+  updateSubTaskStatus(subTaskId: string, isCompleted: boolean): Promise<SubTask>;
+
+  /** Marca todas las subtareas de una tarea como completadas. */
+  completeAllSubTasks(taskId: string): Promise<void>;
+
+  /** Desmarca todas las subtareas de una tarea. */
+  uncompleteAllSubTasks(taskId: string): Promise<void>;
 }
