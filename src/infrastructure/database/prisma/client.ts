@@ -9,8 +9,19 @@ import { Pool } from 'pg';
 function createPrismaClient(): PrismaClient {
   // POSTGRES_URL_NON_POOLING is the Vercel/Supabase integration var — no pgbouncer flag.
   // DATABASE_URL is the local fallback. pgbouncer=true is a Prisma CLI param, not valid for pg.Pool.
-  const connectionString =
-    process.env.POSTGRES_URL_NON_POOLING ?? process.env.DATABASE_URL;
+  const rawUrl = process.env.POSTGRES_URL_NON_POOLING ?? process.env.DATABASE_URL;
+
+  // Strip sslmode and pgbouncer from the URL so pg-connection-string doesn't override
+  // our explicit ssl config. pg-connection-string ≥v3 treats sslmode=require as verify-full,
+  // rejecting Supabase's self-signed cert even when rejectUnauthorized:false is set on Pool.
+  let connectionString = rawUrl;
+  if (rawUrl) {
+    const url = new URL(rawUrl);
+    url.searchParams.delete('sslmode');
+    url.searchParams.delete('pgbouncer');
+    connectionString = url.toString();
+  }
+
   const pool = new Pool({
     connectionString,
     ssl: { rejectUnauthorized: false },
