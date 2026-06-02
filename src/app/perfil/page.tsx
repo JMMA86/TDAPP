@@ -3,15 +3,9 @@ export default function PerfilPage() {
     <div className="px-4 py-4 space-y-4">
       <header className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-semibold text-gray-800">Mi Perfil</h1>
-          <p className="text-sm text-gray-500">Personaliza tu experiencia</p>
+          <h1 className="text-xl font-semibold text-gray-800 dark:text-gray-100">Mi Perfil</h1>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Personaliza tu experiencia</p>
         </div>
-        <button className="p-2 text-gray-400 hover:text-gray-600 transition-colors" aria-label="Configuracion">
-          <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="3" />
-            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-          </svg>
-        </button>
       </header>
 
       <div className="bg-gradient-to-r from-violet-400 to-violet-500 rounded-2xl p-5 text-white">
@@ -46,14 +40,14 @@ export default function PerfilPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4">
+      <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 p-4">
         <div className="flex items-center gap-2 mb-4">
           <svg className="w-5 h-5 text-violet-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="10" />
             <circle cx="12" cy="12" r="6" />
             <circle cx="12" cy="12" r="2" />
           </svg>
-          <h3 className="text-sm font-semibold text-gray-800">Progreso semanal</h3>
+          <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-100">Progreso semanal</h3>
         </div>
         <div className="space-y-3">
           {[
@@ -66,12 +60,12 @@ export default function PerfilPage() {
             return (
               <div key={item.label}>
                 <div className="flex justify-between items-center mb-0.5">
-                  <span className="text-sm text-gray-600">{item.label}</span>
-                  <span className="text-sm font-medium text-gray-800">
+                  <span className="text-sm text-gray-600 dark:text-gray-300">{item.label}</span>
+                  <span className="text-sm font-medium text-gray-800 dark:text-gray-100">
                     {item.current}{item.unit ? item.unit : ''}/{item.total}{item.unit ? item.unit : ''}
                   </span>
                 </div>
-                <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                   <div
                     className="h-full bg-violet-500 rounded-full transition-all duration-500"
                     style={{ width: `${percent}%` }}
@@ -83,12 +77,12 @@ export default function PerfilPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4">
+      <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 p-4">
         <div className="flex items-center gap-2 mb-4">
           <svg className="w-5 h-5 text-amber-400" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z" />
           </svg>
-          <h3 className="text-sm font-semibold text-gray-800">Logros</h3>
+          <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-100">Logros</h3>
         </div>
         <div className="grid grid-cols-3 gap-3">
           {[
@@ -102,11 +96,11 @@ export default function PerfilPage() {
             <div
               key={badge.label}
               className={`flex flex-col items-center gap-1 p-2 rounded-xl text-center ${
-                badge.unlocked ? 'bg-gray-50' : 'bg-gray-50/50 opacity-50'
+                badge.unlocked ? 'bg-gray-50 dark:bg-gray-800/50' : 'bg-gray-50/50 dark:bg-gray-800/30 opacity-50'
               }`}
             >
               <span className="text-2xl">{badge.unlocked ? badge.emoji : '\uD83D\uDD12'}</span>
-              <span className="text-xs font-medium text-gray-600 leading-tight">{badge.label}</span>
+              <span className="text-xs font-medium text-gray-600 dark:text-gray-300 leading-tight">{badge.label}</span>
             </div>
           ))}
         </div>

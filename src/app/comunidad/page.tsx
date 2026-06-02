@@ -30,8 +30,8 @@ export default function ComunidadPage() {
     <div className="px-4 py-4 space-y-4">
       <header className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-semibold text-gray-800">Comunidad</h1>
-          <p className="text-sm text-gray-500">Conecta y aprende junto a otros</p>
+          <h1 className="text-xl font-semibold text-gray-800 dark:text-gray-100">Comunidad</h1>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Conecta y aprende junto a otros</p>
         </div>
         <button className="p-2 text-violet-500 hover:text-violet-600 transition-colors" aria-label="Explorar grupos">
           <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -69,7 +69,7 @@ export default function ComunidadPage() {
 
       <div>
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-sm font-semibold text-gray-800">Grupos de apoyo</h2>
+          <h2 className="text-sm font-semibold text-gray-800 dark:text-gray-100">Grupos de apoyo</h2>
           <button className="text-sm font-medium text-violet-500 hover:text-violet-600 transition-colors inline-flex items-center gap-1">
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2" />
@@ -81,17 +81,17 @@ export default function ComunidadPage() {
         </div>
         <div className="space-y-3">
           {groups.map((group) => (
-            <div key={group.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4">
+            <div key={group.id} className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 p-4">
               <div className="flex items-start justify-between">
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-sm font-semibold text-gray-800">{group.name}</h3>
-                  <p className="text-xs text-gray-500 mt-0.5 line-clamp-2">{group.description}</p>
+                  <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-100">{group.name}</h3>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 line-clamp-2">{group.description}</p>
                   <div className="flex items-center gap-2 mt-2">
-                    <span className="text-xs text-gray-400">
+                    <span className="text-xs text-gray-400 dark:text-gray-500">
                       {group.members.toLocaleString()} miembros
                     </span>
-                    <span className="text-xs text-gray-400">&middot;</span>
-                    <span className="text-xs text-gray-400">
+                    <span className="text-xs text-gray-400 dark:text-gray-500">&middot;</span>
+                    <span className="text-xs text-gray-400 dark:text-gray-500">
                       Actividad: {group.active}
                     </span>
                   </div>
@@ -105,7 +105,7 @@ export default function ComunidadPage() {
                   <button
                     className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
                       group.joined
-                        ? 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'
+                        ? 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
                         : 'bg-violet-500 text-white hover:bg-violet-600'
                     }`}
                   >

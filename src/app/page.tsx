@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import ThemeToggle from '@/components/theme-toggle';
 
 interface Task {
   id: string;
@@ -38,18 +39,10 @@ export default function Home() {
     <div className="px-4 py-4 space-y-4">
       <header className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-semibold text-gray-800">Hola, Alex!</h1>
-          <p className="text-sm text-gray-500">Como te sientes hoy?</p>
+          <h1 className="text-xl font-semibold text-gray-800 dark:text-gray-100">Hola, Alex!</h1>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Como te sientes hoy?</p>
         </div>
-        <button
-          className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
-          aria-label="Configuracion"
-        >
-          <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="3" />
-            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-          </svg>
-        </button>
+        <ThemeToggle className="p-2 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors" />
       </header>
 
       <div className="bg-gradient-to-r from-violet-400 to-violet-500 rounded-2xl p-5 text-white">
@@ -101,10 +94,10 @@ export default function Home() {
         </button>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4">
-        <h2 className="text-sm font-semibold text-gray-800 mb-1">Progreso de hoy</h2>
+      <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 p-4">
+        <h2 className="text-sm font-semibold text-gray-800 dark:text-gray-100 mb-1">Progreso de hoy</h2>
         {loading ? (
-          <p className="text-sm text-gray-400">Cargando...</p>
+          <p className="text-sm text-gray-400 dark:text-gray-500">Cargando...</p>
         ) : (
           <>
             <p className="text-xs text-emerald-600 font-medium mb-3">
@@ -114,7 +107,7 @@ export default function Home() {
               {tasks.slice(0, 4).map((task) => (
                 <li key={task.id} className="flex items-center gap-3">
                   <span className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
-                    task.status === 'COMPLETED' ? 'bg-green-500 border-green-500' : 'border-gray-300'
+                    task.status === 'COMPLETED' ? 'bg-green-500 border-green-500' : 'border-gray-300 dark:border-gray-600'
                   }`}>
                     {task.status === 'COMPLETED' && (
                       <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
@@ -122,27 +115,27 @@ export default function Home() {
                       </svg>
                     )}
                   </span>
-                  <span className={`text-sm flex-1 truncate ${task.status === 'COMPLETED' ? 'text-gray-400 line-through' : 'text-gray-700'}`}>
+                  <span className={`text-sm flex-1 truncate ${task.status === 'COMPLETED' ? 'text-gray-400 dark:text-gray-500 line-through' : 'text-gray-700 dark:text-gray-200'}`}>
                     {task.title}
                   </span>
                   <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                    task.status === 'COMPLETED' ? 'bg-gray-100 text-gray-500' : 'bg-white border border-gray-200 text-gray-500'
+                    task.status === 'COMPLETED' ? 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-200' : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-200'
                   }`}>
                     {task.status === 'COMPLETED' ? 'Completada' : 'Pendiente'}
                   </span>
                 </li>
               ))}
               {tasks.length === 0 && (
-                <p className="text-sm text-gray-400 py-2">No tienes tareas aun. Crea una!</p>
+                <p className="text-sm text-gray-400 dark:text-gray-500 py-2">No tienes tareas aun. Crea una!</p>
               )}
             </ul>
-            <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+            <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
               <div
                 className="h-full bg-violet-500 rounded-full transition-all duration-500"
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
-            <p className="text-xs text-gray-500 mt-1">Progreso diario {progressPercent}%</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Progreso diario {progressPercent}%</p>
           </>
         )}
       </div>

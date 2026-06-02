@@ -1,0 +1,71 @@
+- generic [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e336]:
+      - generic [ref=e337]:
+        - generic [ref=e338]:
+          - heading "Hola, Alex!" [level=1] [ref=e339]
+          - paragraph [ref=e340]: Como te sientes hoy?
+        - button "Cambiar a tema claro" [ref=e341]:
+          - img [ref=e342]
+      - generic [ref=e345]:
+        - generic [ref=e346]:
+          - heading "Estado de animo" [level=2] [ref=e347]
+          - img [ref=e348]
+        - generic [ref=e350]:
+          - button "Registrar estado de animo" [ref=e351]: 😊
+          - button "Registrar estado de animo" [ref=e352]: 😐
+          - button "Registrar estado de animo" [ref=e353]: 😔
+          - button "Registrar estado de animo" [ref=e354]: 😰
+          - button "Registrar estado de animo" [ref=e355]: 😴
+        - paragraph [ref=e356]: Toca para registrar como te sientes ahora
+      - generic [ref=e357]:
+        - link "Respira 2 min" [ref=e358] [cursor=pointer]:
+          - /url: /bienestar
+          - img [ref=e359]
+          - paragraph [ref=e361]: Respira
+          - paragraph [ref=e362]: 2 min
+        - button "Micro-tarea Facil" [ref=e363]:
+          - img [ref=e364]
+          - paragraph [ref=e368]: Micro-tarea
+          - paragraph [ref=e369]: Facil
+      - generic [ref=e370]:
+        - heading "Progreso de hoy" [level=2] [ref=e371]
+        - paragraph [ref=e372]: 0/6 completadas
+        - list [ref=e373]:
+          - listitem [ref=e374]:
+            - generic [ref=e376]: Preparar presentación de la universidad
+            - generic [ref=e377]: Pendiente
+          - listitem [ref=e378]:
+            - generic [ref=e380]: Tomar agua cada 2 horas
+            - generic [ref=e381]: Pendiente
+          - listitem [ref=e382]:
+            - generic [ref=e384]: Repasar apuntes de la clase de cálculo
+            - generic [ref=e385]: Pendiente
+          - listitem [ref=e386]:
+            - generic [ref=e388]: Llamar al especialista médico
+            - generic [ref=e389]: Pendiente
+        - paragraph [ref=e391]: Progreso diario 0%
+  - navigation [ref=e39]:
+    - link "Inicio" [active] [ref=e40] [cursor=pointer]:
+      - /url: /
+      - img [ref=e41]
+      - generic [ref=e44]: Inicio
+    - link "Agenda" [ref=e45] [cursor=pointer]:
+      - /url: /agenda
+      - img [ref=e46]
+      - generic [ref=e49]: Agenda
+    - link "Bienestar" [ref=e50] [cursor=pointer]:
+      - /url: /bienestar
+      - img [ref=e51]
+      - generic [ref=e53]: Bienestar
+    - link "Comunidad" [ref=e54] [cursor=pointer]:
+      - /url: /comunidad
+      - img [ref=e55]
+      - generic [ref=e57]: Comunidad
+    - link "Perfil" [ref=e58] [cursor=pointer]:
+      - /url: /perfil
+      - img [ref=e59]
+      - generic [ref=e62]: Perfil
+  - button "Open Next.js Dev Tools" [ref=e68] [cursor=pointer]:
+    - img [ref=e69]
+  - alert [ref=e92]

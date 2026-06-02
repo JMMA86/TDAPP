@@ -153,14 +153,14 @@ export default function AddTaskModal({ isOpen, onClose, onTaskCreated }: AddTask
       {/* Tarjeta del modal */}
       <div
         ref={cardRef}
-        className={`relative bg-white rounded-2xl shadow-xl max-w-md w-full p-6 transition-[opacity,transform] duration-200 ${visible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
+        className={`relative bg-white dark:bg-gray-900 rounded-2xl shadow-xl max-w-md w-full p-6 transition-[opacity,transform] duration-200 ${visible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
       >
         {/* Encabezado */}
         <div className="flex items-center justify-between mb-5">
-          <h2 className="text-lg font-semibold text-gray-800">Nueva tarea</h2>
+          <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">Nueva tarea</h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-full hover:bg-gray-100"
+            className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
             aria-label="Cerrar"
             type="button"
           >
@@ -181,7 +181,7 @@ export default function AddTaskModal({ isOpen, onClose, onTaskCreated }: AddTask
 
         {/* Error */}
         {error && (
-          <div className="mb-4 bg-red-50 border border-red-200 rounded-lg p-3">
+          <div className="mb-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3">
             <p className="text-red-700 text-sm">{error}</p>
           </div>
         )}
@@ -189,7 +189,7 @@ export default function AddTaskModal({ isOpen, onClose, onTaskCreated }: AddTask
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Título */}
           <div>
-            <label htmlFor="task-title" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="task-title" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
               Título <span className="text-red-500">*</span>
             </label>
             <input
@@ -206,7 +206,7 @@ export default function AddTaskModal({ isOpen, onClose, onTaskCreated }: AddTask
 
           {/* Descripción */}
           <div>
-            <label htmlFor="task-desc" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="task-desc" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
               Descripción
             </label>
             <textarea
@@ -215,13 +215,13 @@ export default function AddTaskModal({ isOpen, onClose, onTaskCreated }: AddTask
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Detalles adicionales..."
               rows={3}
-              className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-shadow resize-none"
+              className="w-full px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg text-sm text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-shadow resize-none"
             />
           </div>
 
           {/* Tipo de tarea */}
           <fieldset>
-            <legend className="block text-sm font-medium text-gray-700 mb-2">Tipo</legend>
+            <legend className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Tipo</legend>
             <div className="flex gap-2">
               {taskTypeOptions.map((opt) => (
                 <button
@@ -243,7 +243,7 @@ export default function AddTaskModal({ isOpen, onClose, onTaskCreated }: AddTask
 
           {/* Prioridad */}
           <fieldset>
-            <legend className="block text-sm font-medium text-gray-700 mb-2">Prioridad</legend>
+            <legend className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Prioridad</legend>
             <div className="flex gap-2">
               {priorityOptions.map((opt) => (
                 <button
@@ -253,7 +253,7 @@ export default function AddTaskModal({ isOpen, onClose, onTaskCreated }: AddTask
                   className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-colors ${
                     priority === opt.value
                       ? 'bg-violet-500 text-white shadow-sm'
-                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                      : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
                   }`}
                 >
                   {opt.label}
@@ -264,7 +264,7 @@ export default function AddTaskModal({ isOpen, onClose, onTaskCreated }: AddTask
 
           {/* Fecha límite */}
           <div>
-            <label htmlFor="task-due" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="task-due" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
               Fecha límite
             </label>
             <input
@@ -272,7 +272,7 @@ export default function AddTaskModal({ isOpen, onClose, onTaskCreated }: AddTask
               type="date"
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
-              className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-shadow"
+              className="w-full px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg text-sm text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-shadow"
             />
           </div>
 
@@ -281,7 +281,7 @@ export default function AddTaskModal({ isOpen, onClose, onTaskCreated }: AddTask
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 py-2.5 px-4 rounded-lg text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 transition-colors"
+              className="flex-1 py-2.5 px-4 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
             >
               Cancelar
             </button>

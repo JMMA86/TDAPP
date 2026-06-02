@@ -17,8 +17,8 @@ export default function BienestarPage() {
   return (
     <div className="px-4 py-4 space-y-4">
       <header>
-        <h1 className="text-xl font-semibold text-gray-800">Bienestar</h1>
-        <p className="text-sm text-gray-500">Cuida tu salud mental</p>
+        <h1 className="text-xl font-semibold text-gray-800 dark:text-gray-100">Bienestar</h1>
+        <p className="text-sm text-gray-500 dark:text-gray-400">Cuida tu salud mental</p>
       </header>
 
       <div className="bg-gradient-to-r from-violet-400 to-violet-500 rounded-2xl p-5 text-white">

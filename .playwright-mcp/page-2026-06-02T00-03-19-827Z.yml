@@ -1,0 +1,71 @@
+- generic [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - heading "Hola, Alex!" [level=1] [ref=e6]
+          - paragraph [ref=e7]: Como te sientes hoy?
+        - button "Cambiar a tema claro" [active] [ref=e93]:
+          - img [ref=e9]
+      - generic [ref=e11]:
+        - generic [ref=e12]:
+          - heading "Estado de animo" [level=2] [ref=e13]
+          - img [ref=e14]
+        - generic [ref=e16]:
+          - button "Registrar estado de animo" [ref=e17]: 😊
+          - button "Registrar estado de animo" [ref=e18]: 😐
+          - button "Registrar estado de animo" [ref=e19]: 😔
+          - button "Registrar estado de animo" [ref=e20]: 😰
+          - button "Registrar estado de animo" [ref=e21]: 😴
+        - paragraph [ref=e22]: Toca para registrar como te sientes ahora
+      - generic [ref=e23]:
+        - link "Respira 2 min" [ref=e24] [cursor=pointer]:
+          - /url: /bienestar
+          - img [ref=e25]
+          - paragraph [ref=e27]: Respira
+          - paragraph [ref=e28]: 2 min
+        - button "Micro-tarea Facil" [ref=e29]:
+          - img [ref=e30]
+          - paragraph [ref=e34]: Micro-tarea
+          - paragraph [ref=e35]: Facil
+      - generic [ref=e36]:
+        - heading "Progreso de hoy" [level=2] [ref=e37]
+        - paragraph [ref=e72]: 0/6 completadas
+        - list [ref=e73]:
+          - listitem [ref=e74]:
+            - generic [ref=e76]: Preparar presentación de la universidad
+            - generic [ref=e77]: Pendiente
+          - listitem [ref=e78]:
+            - generic [ref=e80]: Tomar agua cada 2 horas
+            - generic [ref=e81]: Pendiente
+          - listitem [ref=e82]:
+            - generic [ref=e84]: Repasar apuntes de la clase de cálculo
+            - generic [ref=e85]: Pendiente
+          - listitem [ref=e86]:
+            - generic [ref=e88]: Llamar al especialista médico
+            - generic [ref=e89]: Pendiente
+        - paragraph [ref=e91]: Progreso diario 0%
+  - navigation [ref=e39]:
+    - link "Inicio" [ref=e40] [cursor=pointer]:
+      - /url: /
+      - img [ref=e41]
+      - generic [ref=e44]: Inicio
+    - link "Agenda" [ref=e45] [cursor=pointer]:
+      - /url: /agenda
+      - img [ref=e46]
+      - generic [ref=e49]: Agenda
+    - link "Bienestar" [ref=e50] [cursor=pointer]:
+      - /url: /bienestar
+      - img [ref=e51]
+      - generic [ref=e53]: Bienestar
+    - link "Comunidad" [ref=e54] [cursor=pointer]:
+      - /url: /comunidad
+      - img [ref=e55]
+      - generic [ref=e57]: Comunidad
+    - link "Perfil" [ref=e58] [cursor=pointer]:
+      - /url: /perfil
+      - img [ref=e59]
+      - generic [ref=e62]: Perfil
+  - button "Open Next.js Dev Tools" [ref=e68] [cursor=pointer]:
+    - img [ref=e69]
+  - alert [ref=e92]

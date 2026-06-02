@@ -175,8 +175,8 @@ export default function AgendaPage() {
       <div className="px-4 py-4 space-y-4">
         <header className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-semibold text-gray-800">Agenda</h1>
-            <p className="text-sm text-gray-500">Organiza tu dia</p>
+            <h1 className="text-xl font-semibold text-gray-800 dark:text-gray-100">Agenda</h1>
+            <p className="text-sm text-gray-500 dark:text-gray-400">Organiza tu dia</p>
           </div>
           <button
             onClick={() => { setShowAddModal(true); setModalKey((k) => k + 1); }}
@@ -217,7 +217,7 @@ export default function AgendaPage() {
 
         <div className="relative">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <svg className="w-5 h-5 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
@@ -226,7 +226,7 @@ export default function AgendaPage() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Buscar tareas..."
-            className="w-full pl-10 pr-4 py-2.5 rounded-full border border-gray-200 focus:border-violet-400 focus:ring-2 focus:ring-violet-100 outline-none text-sm text-gray-700 placeholder-gray-400 bg-white transition-colors"
+            className="w-full pl-10 pr-4 py-2.5 rounded-full border border-gray-200 dark:border-gray-700 focus:border-violet-400 focus:ring-2 focus:ring-violet-100 outline-none text-sm text-gray-700 dark:text-gray-200 placeholder-gray-400 dark:placeholder:text-gray-500 bg-white dark:bg-gray-800 transition-colors"
           />
         </div>
 
@@ -237,8 +237,8 @@ export default function AgendaPage() {
               onClick={() => setTaskTypeFilter(tab.type)}
               className={`flex-shrink-0 inline-flex items-center gap-1 px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
                 taskTypeFilter === tab.type
-                  ? 'bg-white shadow-sm text-violet-600'
-                  : 'text-gray-500 hover:text-gray-700'
+                  ? 'bg-white dark:bg-gray-800 shadow-sm text-violet-600'
+                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
               }`}
             >
               <span className="text-xs">{tab.icon}</span>
@@ -248,9 +248,9 @@ export default function AgendaPage() {
         </div>
 
         {isLoading ? (
-          <p className="text-center text-gray-500 py-8">Cargando...</p>
+          <p className="text-center text-gray-500 dark:text-gray-400 py-8">Cargando...</p>
         ) : error ? (
-          <div className="bg-red-50 border border-red-200 rounded-xl p-4">
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4">
             <p className="text-red-700 text-sm">{error}</p>
             <button
               onClick={() => setError(null)}
@@ -260,7 +260,7 @@ export default function AgendaPage() {
             </button>
           </div>
         ) : filteredTasks.length === 0 ? (
-          <p className="text-center text-gray-500 py-8">
+          <p className="text-center text-gray-500 dark:text-gray-400 py-8">
             {searchQuery ? 'No se encontraron tareas' : 'No tienes tareas de este tipo'}
           </p>
         ) : (

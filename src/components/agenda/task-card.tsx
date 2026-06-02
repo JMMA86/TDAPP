@@ -35,14 +35,14 @@ interface TaskCardProps {
 }
 
 const statusConfig: Record<TaskStatus, { label: string; dot: string; badge: string }> = {
-  PENDING: { label: 'Pendiente', dot: 'bg-gray-400', badge: 'bg-gray-100 text-gray-600' },
+  PENDING: { label: 'Pendiente', dot: 'bg-gray-400', badge: 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-200' },
   IN_PROGRESS: { label: 'En progreso', dot: 'bg-blue-400', badge: 'bg-blue-100 text-blue-700' },
   COMPLETED: { label: 'Completada', dot: 'bg-green-400', badge: 'bg-green-100 text-green-700' },
   ABANDONED: { label: 'Abandonada', dot: 'bg-red-400', badge: 'bg-red-100 text-red-700' },
 };
 
 const priorityConfig: Record<TaskPriority, { label: string; badge: string }> = {
-  LOW: { label: 'Baja', badge: 'bg-gray-100 text-gray-600' },
+  LOW: { label: 'Baja', badge: 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-200' },
   MEDIUM: { label: 'Media', badge: 'bg-blue-100 text-blue-700' },
   HIGH: { label: 'Alta', badge: 'bg-orange-100 text-orange-700' },
 };
@@ -121,15 +121,15 @@ export default function TaskCard({
             onClick={() => setShowDeleteConfirm(false)}
             aria-hidden="true"
           />
-          <div className="relative bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4">
-            <h3 className="text-lg font-semibold text-gray-800">Eliminar esta tarea?</h3>
-            <p className="mt-1 text-sm text-gray-500 truncate">{task.title}</p>
-            <p className="mt-2 text-sm text-gray-500">Esta accion no se puede deshacer</p>
+          <div className="relative bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4">
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">Eliminar esta tarea?</h3>
+            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 truncate">{task.title}</p>
+            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">Esta accion no se puede deshacer</p>
             <div className="flex gap-3 mt-5">
               <button
                 autoFocus
                 onClick={() => setShowDeleteConfirm(false)}
-                className="flex-1 py-2.5 px-4 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
+                className="flex-1 py-2.5 px-4 rounded-full text-sm font-medium bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
               >
                 Cancelar
               </button>
@@ -147,7 +147,7 @@ export default function TaskCard({
         </div>
       )}
 
-      <div className="relative bg-white rounded-2xl shadow-sm border border-gray-100 p-4 transition-shadow hover:shadow-md">
+      <div className="relative bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 p-4 transition-shadow hover:shadow-md">
         <button
           onClick={() => setShowDeleteConfirm(true)}
           aria-label="Eliminar tarea"
@@ -167,7 +167,7 @@ export default function TaskCard({
               'w-8 h-8 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors mt-0.5',
               isCompleted
                 ? 'bg-green-500 border-green-500 text-white'
-                : 'border-gray-300 hover:border-violet-400',
+                : 'border-gray-300 dark:border-gray-600 hover:border-violet-400',
             ].join(' ')}
           >
             {isCompleted && (
@@ -187,14 +187,14 @@ export default function TaskCard({
               <h3
                 className={[
                   'text-sm font-medium leading-snug line-clamp-2',
-                  isCompleted ? 'text-gray-400 line-through' : 'text-gray-800',
+                  isCompleted ? 'text-gray-400 dark:text-gray-500 line-through' : 'text-gray-800 dark:text-gray-100',
                 ].join(' ')}
               >
                 {task.title}
               </h3>
             </div>
             {subTasks.length > 0 && !isCompleted && (
-              <p className="text-xs text-gray-400">Dividido en micro-tareas manejables</p>
+              <p className="text-xs text-gray-400 dark:text-gray-500">Dividido en micro-tareas manejables</p>
             )}
 
             <div className="flex flex-wrap gap-1.5 mt-2">
@@ -218,7 +218,7 @@ export default function TaskCard({
               </span>
 
               {typeInfo && (
-                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-violet-50 text-violet-600">
+                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-violet-50 dark:bg-violet-900/20 text-violet-600">
                   {typeInfo.label}
                 </span>
               )}
@@ -228,7 +228,7 @@ export default function TaskCard({
 
         {subTasks.length > 0 && (
           <>
-            <div className="mt-3 bg-violet-50 rounded-xl p-3">
+            <div className="mt-3 bg-violet-50 dark:bg-violet-900/20 rounded-xl p-3">
               <div className="flex items-center justify-between mb-1">
                 <span className="text-xs font-medium text-violet-700">Progreso general</span>
                 <span className="text-xs font-semibold text-violet-700">
@@ -244,10 +244,10 @@ export default function TaskCard({
               <p className="mt-1.5 text-xs text-violet-600">{motivMessage}</p>
             </div>
 
-            <div className="mt-3 border-t border-gray-100 pt-3">
+            <div className="mt-3 border-t border-gray-100 dark:border-gray-800 pt-3">
               <button
                 onClick={() => setShowSubtasks((prev) => !prev)}
-                className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 transition-colors"
+                className="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
               >
                 <svg
                   className={`w-3.5 h-3.5 transition-transform ${showSubtasks ? 'rotate-0' : '-rotate-90'}`}
@@ -265,7 +265,7 @@ export default function TaskCard({
                   {subTasks.map((sub) => {
                     const diff = difficultyConfig[sub.difficulty] || difficultyConfig.EASY;
                     return (
-                      <li key={sub.id} className="flex items-start gap-2 text-sm text-gray-600">
+                      <li key={sub.id} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
                         <button
                           onClick={() => onSubTaskToggle?.(sub.id, !sub.isCompleted)}
                           aria-label={sub.isCompleted ? 'Desmarcar paso' : 'Marcar paso como completado'}
@@ -273,7 +273,7 @@ export default function TaskCard({
                             'mt-0.5 w-4 h-4 flex-shrink-0 rounded-full border-2 flex items-center justify-center transition-colors',
                             sub.isCompleted
                               ? 'bg-green-500 border-green-500'
-                              : 'border-gray-300 hover:border-violet-400',
+                              : 'border-gray-300 dark:border-gray-600 hover:border-violet-400',
                           ].join(' ')}
                         >
                           {sub.isCompleted && (
@@ -283,7 +283,7 @@ export default function TaskCard({
                           )}
                         </button>
                         <div className="flex-1 min-w-0">
-                          <span className={sub.isCompleted ? 'line-through text-gray-400' : ''}>
+                          <span className={sub.isCompleted ? 'line-through text-gray-400 dark:text-gray-500' : ''}>
                             {sub.title}
                           </span>
                           <div className="flex gap-1 mt-0.5">
@@ -295,7 +295,7 @@ export default function TaskCard({
                             >
                               {diff.label}
                             </span>
-                            <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500">
+                            <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-200">
                               <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                                 <circle cx="12" cy="12" r="10" />
                                 <path d="M12 6v6l4 2" />

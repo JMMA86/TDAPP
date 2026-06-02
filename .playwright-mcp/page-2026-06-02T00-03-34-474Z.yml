@@ -1,0 +1,243 @@
+- generic [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e96]:
+      - generic [ref=e97]:
+        - generic [ref=e98]:
+          - heading "Agenda" [level=1] [ref=e99]
+          - paragraph [ref=e100]: Organiza tu dia
+        - button "Agregar" [ref=e101]:
+          - img [ref=e102]
+          - text: Agregar
+      - generic [ref=e104]:
+        - generic [ref=e105]:
+          - heading "Hoy, Lunes 1" [level=2] [ref=e106]
+          - img [ref=e107]
+        - generic [ref=e110]:
+          - generic [ref=e111]:
+            - paragraph [ref=e112]: "6"
+            - paragraph [ref=e113]: Total
+          - generic [ref=e114]:
+            - paragraph [ref=e115]: "0"
+            - paragraph [ref=e116]: Completadas
+          - generic [ref=e117]:
+            - paragraph [ref=e118]: "6"
+            - paragraph [ref=e119]: Pendientes
+      - generic [ref=e120]:
+        - generic:
+          - img
+        - searchbox "Buscar tareas..." [ref=e121]
+      - generic [ref=e122]:
+        - button "📋 Todas" [ref=e123]:
+          - generic [ref=e124]: 📋
+          - text: Todas
+        - button "⚡ Micro-tarea" [ref=e125]:
+          - generic [ref=e126]: ⚡
+          - text: Micro-tarea
+        - button "🕐 Recordatorio" [ref=e127]:
+          - generic [ref=e128]: 🕐
+          - text: Recordatorio
+        - button "🎯 Meta" [ref=e129]:
+          - generic [ref=e130]: 🎯
+          - text: Meta
+      - generic [ref=e131]:
+        - generic [ref=e132]:
+          - button "Eliminar tarea" [ref=e133]:
+            - img [ref=e134]
+          - generic [ref=e137]:
+            - button "Marcar como completada" [ref=e138]
+            - generic [ref=e139]:
+              - generic [ref=e140]:
+                - generic [ref=e141]: 🎯
+                - heading "Preparar presentación de la universidad" [level=3] [ref=e142]
+              - paragraph [ref=e143]: Dividido en micro-tareas manejables
+              - generic [ref=e144]:
+                - generic [ref=e145]: Baja
+                - generic [ref=e146]: En progreso
+                - generic [ref=e148]: Meta
+          - generic [ref=e149]:
+            - generic [ref=e150]:
+              - generic [ref=e151]: Progreso general
+              - generic [ref=e152]: 0/4
+            - paragraph [ref=e154]: Vas muy bien! Ya completaste algunos pasos.
+          - generic [ref=e155]:
+            - button "4 pasos" [ref=e156]:
+              - img [ref=e157]
+              - generic [ref=e159]: 4 pasos
+            - list [ref=e160]:
+              - listitem [ref=e161]:
+                - button "Marcar paso como completado" [ref=e162]
+                - generic [ref=e163]:
+                  - text: Revisar el temario y seleccionar los puntos principales
+                  - generic [ref=e164]:
+                    - generic [ref=e165]: facil
+                    - generic [ref=e166]:
+                      - img [ref=e167]
+                      - text: 5min
+              - listitem [ref=e170]:
+                - button "Marcar paso como completado" [ref=e171]
+                - generic [ref=e172]:
+                  - text: Buscar imágenes y gráficos para apoyar los puntos
+                  - generic [ref=e173]:
+                    - generic [ref=e174]: medio
+                    - generic [ref=e175]:
+                      - img [ref=e176]
+                      - text: 10min
+              - listitem [ref=e179]:
+                - button "Marcar paso como completado" [ref=e180]
+                - generic [ref=e181]:
+                  - text: Crear las diapositivas con una idea por slide
+                  - generic [ref=e182]:
+                    - generic [ref=e183]: medio
+                    - generic [ref=e184]:
+                      - img [ref=e185]
+                      - text: 15min
+              - listitem [ref=e188]:
+                - button "Marcar paso como completado" [ref=e189]
+                - generic [ref=e190]:
+                  - text: Practicar la exposición en voz alta 2 veces
+                  - generic [ref=e191]:
+                    - generic [ref=e192]: dificil
+                    - generic [ref=e193]:
+                      - img [ref=e194]
+                      - text: 10min
+        - generic [ref=e197]:
+          - button "Eliminar tarea" [ref=e198]:
+            - img [ref=e199]
+          - generic [ref=e202]:
+            - button "Marcar como completada" [ref=e203]
+            - generic [ref=e204]:
+              - generic [ref=e205]:
+                - generic [ref=e206]: 🕐
+                - heading "Tomar agua cada 2 horas" [level=3] [ref=e207]
+              - generic [ref=e208]:
+                - generic [ref=e209]: Baja
+                - generic [ref=e210]: Pendiente
+                - generic [ref=e212]: Recordatorio
+          - button "Dividir con IA" [ref=e214]:
+            - img [ref=e215]
+            - text: Dividir con IA
+        - generic [ref=e217]:
+          - button "Eliminar tarea" [ref=e218]:
+            - img [ref=e219]
+          - generic [ref=e222]:
+            - button "Marcar como completada" [ref=e223]
+            - generic [ref=e224]:
+              - generic [ref=e225]:
+                - generic [ref=e226]: ⚡
+                - heading "Repasar apuntes de la clase de cálculo" [level=3] [ref=e227]
+              - generic [ref=e228]:
+                - generic [ref=e229]: Media
+                - generic [ref=e230]: Pendiente
+                - generic [ref=e232]: Micro-tarea
+          - button "Dividir con IA" [ref=e234]:
+            - img [ref=e235]
+            - text: Dividir con IA
+        - generic [ref=e237]:
+          - button "Eliminar tarea" [ref=e238]:
+            - img [ref=e239]
+          - generic [ref=e242]:
+            - button "Marcar como completada" [ref=e243]
+            - generic [ref=e244]:
+              - generic [ref=e245]:
+                - generic [ref=e246]: 🕐
+                - heading "Llamar al especialista médico" [level=3] [ref=e247]
+              - generic [ref=e248]:
+                - generic [ref=e249]: Alta
+                - generic [ref=e250]: Pendiente
+                - generic [ref=e252]: Recordatorio
+          - button "Dividir con IA" [ref=e254]:
+            - img [ref=e255]
+            - text: Dividir con IA
+        - generic [ref=e257]:
+          - button "Eliminar tarea" [ref=e258]:
+            - img [ref=e259]
+          - generic [ref=e262]:
+            - button "Marcar como completada" [ref=e263]
+            - generic [ref=e264]:
+              - generic [ref=e265]:
+                - generic [ref=e266]: 🎯
+                - heading "Escribir marco teórico de la tesis" [level=3] [ref=e267]
+              - paragraph [ref=e268]: Dividido en micro-tareas manejables
+              - generic [ref=e269]:
+                - generic [ref=e270]: Alta
+                - generic [ref=e271]: Pendiente
+                - generic [ref=e273]: Meta
+          - generic [ref=e274]:
+            - generic [ref=e275]:
+              - generic [ref=e276]: Progreso general
+              - generic [ref=e277]: 0/3
+            - paragraph [ref=e279]: Vas muy bien! Ya completaste algunos pasos.
+          - generic [ref=e280]:
+            - button "3 pasos" [ref=e281]:
+              - img [ref=e282]
+              - generic [ref=e284]: 3 pasos
+            - list [ref=e285]:
+              - listitem [ref=e286]:
+                - button "Marcar paso como completado" [ref=e287]
+                - generic [ref=e288]:
+                  - text: Buscar 5 papers académicos en Google Scholar
+                  - generic [ref=e289]:
+                    - generic [ref=e290]: medio
+                    - generic [ref=e291]:
+                      - img [ref=e292]
+                      - text: 15min
+              - listitem [ref=e295]:
+                - button "Marcar paso como completado" [ref=e296]
+                - generic [ref=e297]:
+                  - text: Leer abstracts y marcar ideas clave
+                  - generic [ref=e298]:
+                    - generic [ref=e299]: facil
+                    - generic [ref=e300]:
+                      - img [ref=e301]
+                      - text: 10min
+              - listitem [ref=e304]:
+                - button "Marcar paso como completado" [ref=e305]
+                - generic [ref=e306]:
+                  - text: Escribir primer borrador de 300 palabras
+                  - generic [ref=e307]:
+                    - generic [ref=e308]: dificil
+                    - generic [ref=e309]:
+                      - img [ref=e310]
+                      - text: 15min
+        - generic [ref=e313]:
+          - button "Eliminar tarea" [ref=e314]:
+            - img [ref=e315]
+          - generic [ref=e318]:
+            - button "Marcar como completada" [ref=e319]
+            - generic [ref=e320]:
+              - generic [ref=e321]:
+                - generic [ref=e322]: ⚡
+                - heading "Comprar víveres de la semana" [level=3] [ref=e323]
+              - generic [ref=e324]:
+                - generic [ref=e325]: Media
+                - generic [ref=e326]: Pendiente
+                - generic [ref=e328]: Micro-tarea
+          - button "Dividir con IA" [ref=e330]:
+            - img [ref=e331]
+            - text: Dividir con IA
+    - button "Agregar tarea" [ref=e333]:
+      - img [ref=e334]
+  - navigation [ref=e39]:
+    - link "Inicio" [ref=e40] [cursor=pointer]:
+      - /url: /
+      - img [ref=e41]
+      - generic [ref=e44]: Inicio
+    - link "Agenda" [active] [ref=e45] [cursor=pointer]:
+      - /url: /agenda
+      - img [ref=e46]
+      - generic [ref=e49]: Agenda
+    - link "Bienestar" [ref=e50] [cursor=pointer]:
+      - /url: /bienestar
+      - img [ref=e51]
+      - generic [ref=e53]: Bienestar
+    - link "Comunidad" [ref=e54] [cursor=pointer]:
+      - /url: /comunidad
+      - img [ref=e55]
+      - generic [ref=e57]: Comunidad
+    - link "Perfil" [ref=e58] [cursor=pointer]:
+      - /url: /perfil
+      - img [ref=e59]
+      - generic [ref=e62]: Perfil
+  - button "Open Next.js Dev Tools" [ref=e68] [cursor=pointer]:
+    - img [ref=e69]
+  - alert [ref=e92]

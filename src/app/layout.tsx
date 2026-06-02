@@ -27,8 +27,23 @@ export default function RootLayout({
     <html
       lang="es"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-gray-50">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                var t = localStorage.getItem('tdapp-theme');
+                if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                  document.documentElement.classList.add('dark');
+                }
+              } catch(e) {}
+            `,
+          }}
+        />
+      </head>
+      <body className="min-h-full flex flex-col bg-white dark:bg-gray-950 text-gray-800 dark:text-gray-200">
         <main className="flex-1 pb-20">{children}</main>
         <NavigationBar />
       </body>
