@@ -15,16 +15,19 @@ function createPrismaClient(): PrismaClient {
   // our explicit ssl config. pg-connection-string ≥v3 treats sslmode=require as verify-full,
   // rejecting Supabase's self-signed cert even when rejectUnauthorized:false is set on Pool.
   let connectionString = rawUrl;
+  let isLocal = false;
   if (rawUrl) {
     const url = new URL(rawUrl);
     url.searchParams.delete('sslmode');
     url.searchParams.delete('pgbouncer');
     connectionString = url.toString();
+    isLocal = url.hostname === 'localhost' || url.hostname === '127.0.0.1';
   }
 
   const pool = new Pool({
     connectionString,
-    ssl: { rejectUnauthorized: false },
+    // Local Postgres (Docker) no soporta SSL; en hosts remotos (Supabase) sí.
+    ssl: isLocal ? false : { rejectUnauthorized: false },
   });
   const adapter = new PrismaPg(pool);
   return new PrismaClient({ adapter });
