@@ -44,8 +44,8 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-white dark:bg-gray-950 text-gray-800 dark:text-gray-200">
-        <main className="flex-1 pb-20">{children}</main>
         <NavigationBar />
+        <main className="flex-1 pb-20 md:pb-0 md:ml-56">{children}</main>
       </body>
     </html>
   );

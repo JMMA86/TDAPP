@@ -1,11 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
-
-function getInitialDark(): boolean {
-  if (typeof document === 'undefined') return false;
-  return document.documentElement.classList.contains('dark');
-}
+import { useState, useEffect, useCallback } from 'react';
 
 function applyTheme(dark: boolean) {
   document.documentElement.classList.toggle('dark', dark);
@@ -17,7 +12,13 @@ function applyTheme(dark: boolean) {
 }
 
 export default function ThemeToggle({ className }: { className?: string }) {
-  const [dark, setDark] = useState(getInitialDark);
+  // Siempre false en servidor para evitar mismatch de hidratación.
+  // useEffect sincroniza con el DOM real (que el script inline pudo haber modificado).
+  const [dark, setDark] = useState(false);
+
+  useEffect(() => {
+    setDark(document.documentElement.classList.contains('dark'));
+  }, []);
 
   const toggle = useCallback(() => {
     setDark((prev) => {

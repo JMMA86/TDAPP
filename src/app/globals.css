@@ -5,3 +5,19 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Base dark mode — garantiza cambio visible aunque los componentes no tengan dark: variants */
+.dark {
+  color-scheme: dark;
+}
+
+.dark body {
+  background-color: #030712; /* gray-950 */
+  color: #e5e7eb;            /* gray-200 */
+}
+
+/* Cards y superficies blancas */
+.dark .card-surface {
+  background-color: #111827; /* gray-900 */
+  border-color: #1f2937;     /* gray-800 */
+}
