@@ -4,6 +4,7 @@
 import 'dotenv/config';
 import { PrismaClient } from '../src/generated/prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
+import bcrypt from 'bcryptjs';
 
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
 const prisma = new PrismaClient({ adapter });
@@ -12,13 +13,15 @@ async function main() {
   console.log('🌱 Iniciando seed de TDApp...\n');
 
   // ─── 1. Usuario demo ─────────────────────────────────────────────────────
+  const passwordHash = await bcrypt.hash('demo123', 12);
   const demoUser = await prisma.user.upsert({
     where: { id: 'demo-user' },
-    update: {},
+    update: { passwordHash },
     create: {
       id: 'demo-user',
       email: 'alex@tdapp.com',
       name: 'Alex',
+      passwordHash,
       role: 'STUDENT',
     },
   });

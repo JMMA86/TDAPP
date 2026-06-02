@@ -62,10 +62,10 @@ export default function AgendaPage() {
 
   const fetchTasks = async () => {
     try {
-      const res = await fetch('/api/tasks?userId=demo-user');
+      const res = await fetch('/api/tasks');
       if (!res.ok) throw new Error('Error al cargar tareas');
       const data = await res.json();
-      setTasks(data);
+      setTasks(Array.isArray(data) ? data : []);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Error desconocido');
     } finally {
@@ -132,7 +132,7 @@ export default function AgendaPage() {
       const res = await fetch('/api/tasks/split', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId: 'demo-user', taskId }),
+        body: JSON.stringify({ taskId }),
       });
 
       if (!res.ok) throw new Error('Error al dividir tarea');
