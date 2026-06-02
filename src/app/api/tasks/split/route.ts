@@ -1,12 +1,11 @@
 import { prisma } from '@/infrastructure/database/prisma/client';
 import { PrismaTaskRepository } from '@/infrastructure/database/prisma/repositories/prisma-task-repository';
-import { OllamaAiService } from '@/infrastructure/ollama/ollama-ai-service';
+import { createAiService } from '@/infrastructure/ai/ai-provider-factory';
 import { SplitTaskUseCase } from '@/core/application/use-cases/split-task.use-case';
 import { getCurrentUserId } from '@/infrastructure/auth/get-current-user';
 
 const taskRepo = new PrismaTaskRepository(prisma);
-const aiService = new OllamaAiService();
-const splitTaskUseCase = new SplitTaskUseCase(taskRepo, aiService);
+const splitTaskUseCase = new SplitTaskUseCase(taskRepo, createAiService());
 
 export async function POST(req: Request) {
   try {
