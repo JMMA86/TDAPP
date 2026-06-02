@@ -99,7 +99,7 @@ export default function NavigationBar() {
       </aside>
 
       {/* ── Bottom nav — mobile only ───────────────────────────── */}
-      <nav className="md:hidden fixed bottom-0 inset-x-0 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 flex justify-evenly py-2 z-40">
+      <nav className="md:hidden fixed bottom-0 inset-x-0 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 flex py-2 z-40">
         {tabs.map((tab) => {
           const isActive = tab.href === '/' ? pathname === '/' : pathname.startsWith(tab.href);
           return (
@@ -107,7 +107,7 @@ export default function NavigationBar() {
               key={tab.href}
               href={tab.href}
               className={[
-                'flex flex-col items-center gap-0.5 px-3 py-1 transition-colors',
+                'flex flex-1 flex-col items-center justify-center gap-0.5 py-1 transition-colors',
                 isActive ? 'text-violet-600' : 'text-gray-400 hover:text-gray-600 dark:text-gray-500',
               ].join(' ')}
             >
