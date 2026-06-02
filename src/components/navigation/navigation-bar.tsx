@@ -35,6 +35,16 @@ const tabs = [
     ),
   },
   {
+    href: '/agente',
+    label: 'Agente',
+    icon: (
+      <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2a3 3 0 00-3 3v1a3 3 0 00-3 3 3 3 0 00-1 5.83V16a3 3 0 003 3 3 3 0 006 0 3 3 0 003-3v-1.17A3 3 0 0018 9a3 3 0 00-3-3V5a3 3 0 00-3-3z" />
+        <path d="M12 2v18" />
+      </svg>
+    ),
+  },
+  {
     href: '/comunidad',
     label: 'Comunidad',
     icon: (

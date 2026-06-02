@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@ai-sdk/groq": "^3.0.39",
+    "@ai-sdk/react": "^3.0.196",
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "ai": "^6.0.194",
