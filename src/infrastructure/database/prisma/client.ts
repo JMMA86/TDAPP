@@ -7,8 +7,12 @@ import { PrismaPg } from '@prisma/adapter-pg';
 import { Pool } from 'pg';
 
 function createPrismaClient(): PrismaClient {
+  // POSTGRES_URL_NON_POOLING is the Vercel/Supabase integration var — no pgbouncer flag.
+  // DATABASE_URL is the local fallback. pgbouncer=true is a Prisma CLI param, not valid for pg.Pool.
+  const connectionString =
+    process.env.POSTGRES_URL_NON_POOLING ?? process.env.DATABASE_URL;
   const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
+    connectionString,
     ssl: { rejectUnauthorized: false },
   });
   const adapter = new PrismaPg(pool);
