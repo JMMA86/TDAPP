@@ -165,6 +165,14 @@ export class PrismaTaskRepository implements ITaskRepository {
     return records.map(toDomainSubTask);
   }
 
+  async getSubTaskById(subTaskId: string): Promise<SubTask | null> {
+    const record = await this.prisma.subTask.findUnique({
+      where: { id: subTaskId },
+    });
+
+    return record ? toDomainSubTask(record) : null;
+  }
+
   async updateSubTaskStatus(subTaskId: string, isCompleted: boolean): Promise<SubTask> {
     const record = await this.prisma.subTask.update({
       where: { id: subTaskId },

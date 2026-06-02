@@ -1,8 +1,6 @@
-// Route Handler: POST /api/tasks — Crear tarea | GET /api/tasks — Listar tareas | PATCH /api/tasks — Actualizar estado | DELETE /api/tasks — Eliminar tarea
-// Controlador delgado: solo valida, invoca repositorio y formatea respuesta.
-
 import { prisma } from '@/infrastructure/database/prisma/client';
 import { PrismaTaskRepository } from '@/infrastructure/database/prisma/repositories/prisma-task-repository';
+import { getCurrentUserId } from '@/infrastructure/auth/get-current-user';
 import type { TaskStatus } from '@/core/application/ports/task-repository.interface';
 
 const VALID_STATUSES: TaskStatus[] = ['PENDING', 'IN_PROGRESS', 'COMPLETED', 'ABANDONED'];
@@ -11,10 +9,15 @@ const taskRepo = new PrismaTaskRepository(prisma);
 
 export async function POST(req: Request) {
   try {
-    const { userId, title, description, status, priority, taskType, dueDate } = await req.json();
+    const userId = await getCurrentUserId();
+    if (!userId) {
+      return Response.json({ error: 'No autorizado' }, { status: 401 });
+    }
 
-    if (!userId || !title) {
-      return Response.json({ error: 'userId y title son obligatorios' }, { status: 400 });
+    const { title, description, status, priority, taskType, dueDate } = await req.json();
+
+    if (!title) {
+      return Response.json({ error: 'title es obligatorio' }, { status: 400 });
     }
 
     const task = await taskRepo.createTask(userId, {
@@ -33,12 +36,11 @@ export async function POST(req: Request) {
   }
 }
 
-export async function GET(req: Request) {
+export async function GET() {
   try {
-    const userId = new URL(req.url).searchParams.get('userId');
-
+    const userId = await getCurrentUserId();
     if (!userId) {
-      return Response.json({ error: 'userId es obligatorio' }, { status: 400 });
+      return Response.json({ error: 'No autorizado' }, { status: 401 });
     }
 
     const tasks = await taskRepo.getTasksByUser(userId);
@@ -51,13 +53,23 @@ export async function GET(req: Request) {
 
 export async function PATCH(req: Request) {
   try {
+    const userId = await getCurrentUserId();
+    if (!userId) {
+      return Response.json({ error: 'No autorizado' }, { status: 401 });
+    }
+
     const { taskId, status } = await req.json();
 
     if (!taskId || !status || !VALID_STATUSES.includes(status)) {
       return Response.json(
-        { error: 'taskId y un status válido (PENDING, IN_PROGRESS, COMPLETED, ABANDONED) son obligatorios' },
+        { error: 'taskId y un status valido (PENDING, IN_PROGRESS, COMPLETED, ABANDONED) son obligatorios' },
         { status: 400 },
       );
+    }
+
+    const task = await taskRepo.getTaskById(taskId);
+    if (!task || task.userId !== userId) {
+      return Response.json({ error: 'Tarea no encontrada' }, { status: 404 });
     }
 
     const updatedTask = await taskRepo.updateTaskStatus(taskId, status as TaskStatus);
@@ -77,10 +89,20 @@ export async function PATCH(req: Request) {
 
 export async function DELETE(req: Request) {
   try {
+    const userId = await getCurrentUserId();
+    if (!userId) {
+      return Response.json({ error: 'No autorizado' }, { status: 401 });
+    }
+
     const { taskId } = await req.json();
 
     if (!taskId) {
       return Response.json({ error: 'taskId es obligatorio' }, { status: 400 });
+    }
+
+    const task = await taskRepo.getTaskById(taskId);
+    if (!task || task.userId !== userId) {
+      return Response.json({ error: 'Tarea no encontrada' }, { status: 404 });
     }
 
     await taskRepo.deleteTask(taskId);

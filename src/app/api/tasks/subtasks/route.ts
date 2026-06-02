@@ -2,11 +2,17 @@
 
 import { prisma } from '@/infrastructure/database/prisma/client';
 import { PrismaTaskRepository } from '@/infrastructure/database/prisma/repositories/prisma-task-repository';
+import { getCurrentUserId } from '@/infrastructure/auth/get-current-user';
 
 const taskRepo = new PrismaTaskRepository(prisma);
 
 export async function PATCH(req: Request) {
   try {
+    const userId = await getCurrentUserId();
+    if (!userId) {
+      return Response.json({ error: 'No autorizado' }, { status: 401 });
+    }
+
     const { subTaskId, isCompleted } = await req.json();
 
     if (!subTaskId || typeof isCompleted !== 'boolean') {
@@ -16,19 +22,28 @@ export async function PATCH(req: Request) {
       );
     }
 
+    // Verify ownership: subtask → parent task → user
+    const subTask = await taskRepo.getSubTaskById(subTaskId);
+    if (!subTask) {
+      return Response.json({ error: 'Paso no encontrado' }, { status: 404 });
+    }
+
+    const parentTask = await taskRepo.getTaskById(subTask.taskId);
+    if (!parentTask || parentTask.userId !== userId) {
+      return Response.json({ error: 'No autorizado' }, { status: 403 });
+    }
+
     const updated = await taskRepo.updateSubTaskStatus(subTaskId, isCompleted);
     const taskId = updated.taskId;
 
     if (isCompleted) {
-      // Si se marca como completado, verificar si TODOS los pasos están listos → completar la principal
       const allSubTasks = await taskRepo.getSubTasksByTask(taskId);
       if (allSubTasks.length > 0 && allSubTasks.every((s) => s.isCompleted)) {
         await taskRepo.updateTaskStatus(taskId, 'COMPLETED');
       }
     } else {
-      // Si se desmarca un paso, revertir la principal si estaba COMPLETED
-      const parentTask = await taskRepo.getTaskById(taskId);
-      if (parentTask?.status === 'COMPLETED') {
+      const parent = await taskRepo.getTaskById(taskId);
+      if (parent?.status === 'COMPLETED') {
         await taskRepo.updateTaskStatus(taskId, 'PENDING');
       }
     }

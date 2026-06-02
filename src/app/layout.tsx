@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import NavigationBar from '@/components/navigation/navigation-bar';
+import AppShell from '@/components/navigation/app-shell';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -32,20 +32,12 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                var t = localStorage.getItem('tdapp-theme');
-                if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                  document.documentElement.classList.add('dark');
-                }
-              } catch(e) {}
-            `,
+            __html: `try{var t=localStorage.getItem('tdapp-theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}`,
           }}
         />
       </head>
       <body className="min-h-full flex flex-col bg-white dark:bg-gray-950 text-gray-800 dark:text-gray-200">
-        <NavigationBar />
-        <main className="flex-1 pb-20 md:pb-0 md:ml-56">{children}</main>
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   );
